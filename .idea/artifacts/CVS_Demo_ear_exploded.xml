@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="CVS_Demo:ear exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/CVS_Demo_ear_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="CVS_Demo/javaeeApplication/javaEEApplication" />
+      <element id="directory" name="web.war">
+        <element id="artifact" artifact-name="CVS_Demo:war exploded" />
+      </element>
+    </root>
+  </artifact>
+</component>
