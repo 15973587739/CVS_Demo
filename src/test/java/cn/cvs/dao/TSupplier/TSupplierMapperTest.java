@@ -1,5 +1,6 @@
-package cn.cvs.dao.sysUser;
+package cn.cvs.dao.TSupplier;
 
+import cn.cvs.dao.TSupplier.TSupplierMapper;
 import cn.cvs.pojo.TSupplier;
 import cn.cvs.utils.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -7,16 +8,17 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class TSupplierMapperTest {
 
+    /**
+     * 供货商总数量
+     */
     @Test
     public void count() {
         SqlSession sqlSession=null;
         try {
             sqlSession= MyBatisUtil.createSqlSession();
-            int count=sqlSession.getMapper(TSupplierMapper.class).count();
+            long count=sqlSession.getMapper(TSupplierMapper.class).count();
             System.out.println("供货商总数量:"+count);
         }catch (Exception e){
             e.printStackTrace();
@@ -25,6 +27,9 @@ public class TSupplierMapperTest {
         }
     }
 
+    /**
+     * 集合返回
+     */
     @Test
     public void getTSupplierList() {
         SqlSession sqlSession=null;

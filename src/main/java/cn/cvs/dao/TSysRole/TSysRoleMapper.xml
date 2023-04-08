@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cvs.dao.TSysRole.TSysRoleMapper">
+
+    <resultMap type="cn.cvs.pojo.TSysRole" id="TSysRoleMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="code" column="code" jdbcType="VARCHAR"/>
+        <result property="rolename" column="roleName" jdbcType="VARCHAR"/>
+        <result property="createduserid" column="createdUserId" jdbcType="INTEGER"/>
+        <result property="createdtime" column="createdTime" jdbcType="TIMESTAMP"/>
+        <result property="updateduserid" column="updatedUserId" jdbcType="INTEGER"/>
+        <result property="updatedtime" column="updatedTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TSysRoleMap">
+        select
+          id, code, roleName, createdUserId, createdTime, updatedUserId, updatedTime
+        from t_sys_role
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TSysRoleMap">
+        select
+          id, code, roleName, createdUserId, createdTime, updatedUserId, updatedTime
+        from t_sys_role
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+            <if test="rolename != null and rolename != ''">
+                and roleName = #{rolename}
+            </if>
+            <if test="createduserid != null">
+                and createdUserId = #{createduserid}
+            </if>
+            <if test="createdtime != null">
+                and createdTime = #{createdtime}
+            </if>
+            <if test="updateduserid != null">
+                and updatedUserId = #{updateduserid}
+            </if>
+            <if test="updatedtime != null">
+                and updatedTime = #{updatedtime}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from t_sys_role
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+            <if test="rolename != null and rolename != ''">
+                and roleName = #{rolename}
+            </if>
+            <if test="createduserid != null">
+                and createdUserId = #{createduserid}
+            </if>
+            <if test="createdtime != null">
+                and createdTime = #{createdtime}
+            </if>
+            <if test="updateduserid != null">
+                and updatedUserId = #{updateduserid}
+            </if>
+            <if test="updatedtime != null">
+                and updatedTime = #{updatedtime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into t_sys_role(code, roleName, createdUserId, createdTime, updatedUserId, updatedTime)
+        values (#{code}, #{rolename}, #{createduserid}, #{createdtime}, #{updateduserid}, #{updatedtime})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into t_sys_role(code, roleName, createdUserId, createdTime, updatedUserId, updatedTime)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.code}, #{entity.rolename}, #{entity.createduserid}, #{entity.createdtime}, #{entity.updateduserid}, #{entity.updatedtime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into t_sys_role(code, roleName, createdUserId, createdTime, updatedUserId, updatedTime)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.code}, #{entity.rolename}, #{entity.createduserid}, #{entity.createdtime}, #{entity.updateduserid}, #{entity.updatedtime})
+        </foreach>
+        on duplicate key update
+        code = values(code),
+        roleName = values(roleName),
+        createdUserId = values(createdUserId),
+        createdTime = values(createdTime),
+        updatedUserId = values(updatedUserId),
+        updatedTime = values(updatedTime)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update t_sys_role
+        <set>
+            <if test="code != null and code != ''">
+                code = #{code},
+            </if>
+            <if test="rolename != null and rolename != ''">
+                roleName = #{rolename},
+            </if>
+            <if test="createduserid != null">
+                createdUserId = #{createduserid},
+            </if>
+            <if test="createdtime != null">
+                createdTime = #{createdtime},
+            </if>
+            <if test="updateduserid != null">
+                updatedUserId = #{updateduserid},
+            </if>
+            <if test="updatedtime != null">
+                updatedTime = #{updatedtime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from t_sys_role where id = #{id}
+    </delete>
+
+</mapper>
+

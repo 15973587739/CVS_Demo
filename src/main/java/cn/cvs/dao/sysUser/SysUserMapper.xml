@@ -3,10 +3,272 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.cvs.dao.sysUser.SysUserMapper">
+    <resultMap type="cn.cvs.pojo.SysUser" id="TSysUserMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="account" column="account" jdbcType="VARCHAR"/>
+        <result property="realname" column="realName" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="INTEGER"/>
+        <result property="birthday" column="birthday" jdbcType="TIMESTAMP"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="roleid" column="roleId" jdbcType="INTEGER"/>
+        <result property="createduserid" column="createdUserId" jdbcType="INTEGER"/>
+        <result property="createdtime" column="createdTime" jdbcType="TIMESTAMP"/>
+        <result property="updateduserid" column="updatedUserId" jdbcType="INTEGER"/>
+        <result property="updatedtime" column="updatedTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
     <select id="count" resultType="int">
         select count(*) from t_sys_user
     </select>
     <select id="getUserList" resultType="SysUser">
         select * from t_sys_user
     </select>
+    <select id="getUsersByRealName" resultType="SysUser" parameterType="String">
+        select * from t_sys_user where realName like CONCAT('%', #{param},'%')
+    </select>
+    <select id="getUsersByPojo" resultType="SysUser" parameterType="SysUser">
+        select * from t_sys_user where realName like CONCAT('%', #{realName},'%') and roleId = ${roleId}
+    </select>
+    <select id="getUsersByMap" resultType="SysUser" parameterType="SysUser">
+        select * from t_sys_user where realName like CONCAT('%', #{rName},'%') and roleId = ${rId}
+    </select>
+    <select id="getUsersByParams" resultType="SysUser">
+        select * from t_sys_user where realName like CONCAT('%', #{reName},'%') and roleId = ${roId}
+    </select>
+
+    <resultMap id="userWithRoleName" type="sysuser">
+        <id property="id" column="id"/>
+        <result property="userRoleName" column="roleName"/>
+    </resultMap>
+    <select id="getUserListWithRoleName" parameterType="SysUser" resultMap="userWithRoleName">
+        select u.*,r.roleName from t_sys_user u,t_sys_role r where u.realName like CONCAT('%',#{realName},'%') and u.roleId = #{roleId} and u.roleId=r.id
+    </select>
+
+    <resultMap id="userWithSysRole" type="SysUser">
+        <id property="id" column="id"/>
+        <result property="realName" column="realName"/>
+        <association property="sysRole" javaType="sysrole">
+            <id property="id" column="rid"/>
+            <result property="code" column="code"/>
+            <result property="roleName" column="roleName"/>
+        </association>
+    </resultMap>
+    <select id="getUserListByRoleId" parameterType="int" resultMap="userWithSysRole">
+        select u.*,r.id as rid,r.code,r.roleName from  t_sys_user u,t_sys_role r where u.roleId = #{roleId} and u.roleId=r.id
+    </select>
+
+    <resultMap id="userWithAddresses" type="sysuser">
+        <id property="id" column="id"/>
+        <result property="account" column="account"/>
+        <result property="realName" column="realName"/>
+        <collection property="addressList" ofType="address">
+            <id property="id" column="aid"/>
+            <result property="contact" column="contact"/>
+            <result property="addressDesc" column="addressDesc"/>
+            <result property="postCode" column="postCode"/>
+            <result property="tel" column="tel"/>
+        </collection>
+    </resultMap>
+
+    <select id="getUserAddressesByUserId" parameterType="int" resultMap="userWithAddresses">
+        select u.*,a.id as aid,a.contact,a.addressDesc,a.postCode,a.tel from t_sys_user u,t_address a where u.id = a.userId and u.id=#{userId};
+    </select>
+
+    <insert id="add" parameterType="SysUser">
+        insert into t_sys_user(account, realName, password, sex, birthday, phone, address, roleId, createdUserId, createdTime)
+        values(#{account},#{realName},#{password}, #{sex},#{birthday},#{phone},#{address},#{roleId},#{createdUserId},#{createdTime})
+    </insert>
+
+
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TSysUserMap">
+        select
+            id, account, realName, password, sex, birthday, phone, address, roleId, createdUserId, createdTime, updatedUserId, updatedTime
+        from t_sys_user
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TSysUserMap">
+        select
+        id, account, realName, password, sex, birthday, phone, address, roleId, createdUserId, createdTime, updatedUserId, updatedTime
+        from t_sys_user
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+            <if test="realname != null and realname != ''">
+                and realName = #{realname}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex}
+            </if>
+            <if test="birthday != null">
+                and birthday = #{birthday}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="roleid != null">
+                and roleId = #{roleid}
+            </if>
+            <if test="createduserid != null">
+                and createdUserId = #{createduserid}
+            </if>
+            <if test="createdtime != null">
+                and createdTime = #{createdtime}
+            </if>
+            <if test="updateduserid != null">
+                and updatedUserId = #{updateduserid}
+            </if>
+            <if test="updatedtime != null">
+                and updatedTime = #{updatedtime}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from t_sys_user
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+            <if test="realname != null and realname != ''">
+                and realName = #{realname}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex}
+            </if>
+            <if test="birthday != null">
+                and birthday = #{birthday}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="roleid != null">
+                and roleId = #{roleid}
+            </if>
+            <if test="createduserid != null">
+                and createdUserId = #{createduserid}
+            </if>
+            <if test="createdtime != null">
+                and createdTime = #{createdtime}
+            </if>
+            <if test="updateduserid != null">
+                and updatedUserId = #{updateduserid}
+            </if>
+            <if test="updatedtime != null">
+                and updatedTime = #{updatedtime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into t_sys_user(account, realName, password, sex, birthday, phone, address, roleId, createdUserId, createdTime, updatedUserId, updatedTime)
+        values (#{account}, #{realname}, #{password}, #{sex}, #{birthday}, #{phone}, #{address}, #{roleid}, #{createduserid}, #{createdtime}, #{updateduserid}, #{updatedtime})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into t_sys_user(account, realName, password, sex, birthday, phone, address, roleId, createdUserId, createdTime, updatedUserId, updatedTime)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.account}, #{entity.realname}, #{entity.password}, #{entity.sex}, #{entity.birthday}, #{entity.phone}, #{entity.address}, #{entity.roleid}, #{entity.createduserid}, #{entity.createdtime}, #{entity.updateduserid}, #{entity.updatedtime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into t_sys_user(account, realName, password, sex, birthday, phone, address, roleId, createdUserId, createdTime, updatedUserId, updatedTime)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.account}, #{entity.realname}, #{entity.password}, #{entity.sex}, #{entity.birthday}, #{entity.phone}, #{entity.address}, #{entity.roleid}, #{entity.createduserid}, #{entity.createdtime}, #{entity.updateduserid}, #{entity.updatedtime})
+        </foreach>
+        on duplicate key update
+        account = values(account),
+        realName = values(realName),
+        password = values(password),
+        sex = values(sex),
+        birthday = values(birthday),
+        phone = values(phone),
+        address = values(address),
+        roleId = values(roleId),
+        createdUserId = values(createdUserId),
+        createdTime = values(createdTime),
+        updatedUserId = values(updatedUserId),
+        updatedTime = values(updatedTime)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update t_sys_user
+        <set>
+            <if test="account != null and account != ''">
+                account = #{account},
+            </if>
+            <if test="realname != null and realname != ''">
+                realName = #{realname},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="roleid != null">
+                roleId = #{roleid},
+            </if>
+            <if test="createduserid != null">
+                createdUserId = #{createduserid},
+            </if>
+            <if test="createdtime != null">
+                createdTime = #{createdtime},
+            </if>
+            <if test="updateduserid != null">
+                updatedUserId = #{updateduserid},
+            </if>
+            <if test="updatedtime != null">
+                updatedTime = #{updatedtime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from t_sys_user where id = #{id}
+    </delete>
+
 </mapper>

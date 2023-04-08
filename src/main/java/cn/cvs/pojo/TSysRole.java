@@ -4,33 +4,25 @@ import java.util.Date;
 import java.io.Serializable;
 
 /**
- * (TAddress)实体类
+ * 系统角色(TSysRole)实体类
  *
  * @author makejava
- * @since 2023-04-08 10:40:14
+ * @since 2023-04-07 11:58:56
  */
-public class TAddress implements Serializable {
-    private static final long serialVersionUID = 660468351853282047L;
+public class TSysRole implements Serializable {
+    private static final long serialVersionUID = -79771962249906363L;
     /**
      * 主键ID
      */
     private Long id;
     /**
-     * 联系人姓名
+     * 角色编码
      */
-    private String contact;
+    private String code;
     /**
-     * 收货地址明细
+     * 角色名称
      */
-    private String addressdesc;
-    /**
-     * 邮编
-     */
-    private String postcode;
-    /**
-     * 联系人电话
-     */
-    private String tel;
+    private String rolename;
     /**
      * 创建者
      */
@@ -47,10 +39,6 @@ public class TAddress implements Serializable {
      * 修改时间
      */
     private Date updatedtime;
-    /**
-     * 用户ID
-     */
-    private Long userid;
 
 
     public Long getId() {
@@ -61,36 +49,20 @@ public class TAddress implements Serializable {
         this.id = id;
     }
 
-    public String getContact() {
-        return contact;
+    public String getCode() {
+        return code;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getAddressdesc() {
-        return addressdesc;
+    public String getRolename() {
+        return rolename;
     }
 
-    public void setAddressdesc(String addressdesc) {
-        this.addressdesc = addressdesc;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setRolename(String rolename) {
+        this.rolename = rolename;
     }
 
     public Long getCreateduserid() {
@@ -123,14 +95,6 @@ public class TAddress implements Serializable {
 
     public void setUpdatedtime(Date updatedtime) {
         this.updatedtime = updatedtime;
-    }
-
-    public Long getUserid() {
-        return userid;
-    }
-
-    public void setUserid(Long userid) {
-        this.userid = userid;
     }
 
 }

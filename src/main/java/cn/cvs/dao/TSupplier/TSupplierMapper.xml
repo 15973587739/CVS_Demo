@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cvs.dao.TSupplier.TSupplierMapper">
+
+    <resultMap type="cn.cvs.pojo.TSupplier" id="TSupplierMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="supcode" column="supCode" jdbcType="VARCHAR"/>
+        <result property="supname" column="supName" jdbcType="VARCHAR"/>
+        <result property="supdesc" column="supDesc" jdbcType="VARCHAR"/>
+        <result property="supcontact" column="supContact" jdbcType="VARCHAR"/>
+        <result property="supphone" column="supPhone" jdbcType="VARCHAR"/>
+        <result property="supaddress" column="supAddress" jdbcType="VARCHAR"/>
+        <result property="supfax" column="supFax" jdbcType="VARCHAR"/>
+        <result property="createduserid" column="createdUserId" jdbcType="INTEGER"/>
+        <result property="createdtime" column="createdTime" jdbcType="TIMESTAMP"/>
+        <result property="updatedtime" column="updatedTime" jdbcType="TIMESTAMP"/>
+        <result property="updateduserid" column="updatedUserId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="count" resultType="int">
+        select count(*) from t_supplier
+    </select>
+    <select id="getTSupplierList" resultType="TSupplier">
+        select * from t_supplier
+    </select>
+    <select id="getSupplierByPojo" resultType="TSupplier" parameterType="TSupplier">
+        select * from t_supplier where supName like CONCAT('%', #{supName},'%') and id = ${id}
+    </select>
+
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TSupplierMap">
+        select
+            id, supCode, supName, supDesc, supContact, supPhone, supAddress, supFax, createdUserId, createdTime, updatedTime, updatedUserId
+        from t_supplier
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TSupplierMap">
+        select
+        id, supCode, supName, supDesc, supContact, supPhone, supAddress, supFax, createdUserId, createdTime, updatedTime, updatedUserId
+        from t_supplier
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="supcode != null and supcode != ''">
+                and supCode = #{supcode}
+            </if>
+            <if test="supname != null and supname != ''">
+                and supName = #{supname}
+            </if>
+            <if test="supdesc != null and supdesc != ''">
+                and supDesc = #{supdesc}
+            </if>
+            <if test="supcontact != null and supcontact != ''">
+                and supContact = #{supcontact}
+            </if>
+            <if test="supphone != null and supphone != ''">
+                and supPhone = #{supphone}
+            </if>
+            <if test="supaddress != null and supaddress != ''">
+                and supAddress = #{supaddress}
+            </if>
+            <if test="supfax != null and supfax != ''">
+                and supFax = #{supfax}
+            </if>
+            <if test="createduserid != null">
+                and createdUserId = #{createduserid}
+            </if>
+            <if test="createdtime != null">
+                and createdTime = #{createdtime}
+            </if>
+            <if test="updatedtime != null">
+                and updatedTime = #{updatedtime}
+            </if>
+            <if test="updateduserid != null">
+                and updatedUserId = #{updateduserid}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from t_supplier
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="supcode != null and supcode != ''">
+                and supCode = #{supcode}
+            </if>
+            <if test="supname != null and supname != ''">
+                and supName = #{supname}
+            </if>
+            <if test="supdesc != null and supdesc != ''">
+                and supDesc = #{supdesc}
+            </if>
+            <if test="supcontact != null and supcontact != ''">
+                and supContact = #{supcontact}
+            </if>
+            <if test="supphone != null and supphone != ''">
+                and supPhone = #{supphone}
+            </if>
+            <if test="supaddress != null and supaddress != ''">
+                and supAddress = #{supaddress}
+            </if>
+            <if test="supfax != null and supfax != ''">
+                and supFax = #{supfax}
+            </if>
+            <if test="createduserid != null">
+                and createdUserId = #{createduserid}
+            </if>
+            <if test="createdtime != null">
+                and createdTime = #{createdtime}
+            </if>
+            <if test="updatedtime != null">
+                and updatedTime = #{updatedtime}
+            </if>
+            <if test="updateduserid != null">
+                and updatedUserId = #{updateduserid}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into t_supplier(supCode, supName, supDesc, supContact, supPhone, supAddress, supFax, createdUserId, createdTime, updatedTime, updatedUserId)
+        values (#{supcode}, #{supname}, #{supdesc}, #{supcontact}, #{supphone}, #{supaddress}, #{supfax}, #{createduserid}, #{createdtime}, #{updatedtime}, #{updateduserid})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into t_supplier(supCode, supName, supDesc, supContact, supPhone, supAddress, supFax, createdUserId, createdTime, updatedTime, updatedUserId)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.supcode}, #{entity.supname}, #{entity.supdesc}, #{entity.supcontact}, #{entity.supphone}, #{entity.supaddress}, #{entity.supfax}, #{entity.createduserid}, #{entity.createdtime}, #{entity.updatedtime}, #{entity.updateduserid})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into t_supplier(supCode, supName, supDesc, supContact, supPhone, supAddress, supFax, createdUserId, createdTime, updatedTime, updatedUserId)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.supcode}, #{entity.supname}, #{entity.supdesc}, #{entity.supcontact}, #{entity.supphone}, #{entity.supaddress}, #{entity.supfax}, #{entity.createduserid}, #{entity.createdtime}, #{entity.updatedtime}, #{entity.updateduserid})
+        </foreach>
+        on duplicate key update
+        supCode = values(supCode),
+        supName = values(supName),
+        supDesc = values(supDesc),
+        supContact = values(supContact),
+        supPhone = values(supPhone),
+        supAddress = values(supAddress),
+        supFax = values(supFax),
+        createdUserId = values(createdUserId),
+        createdTime = values(createdTime),
+        updatedTime = values(updatedTime),
+        updatedUserId = values(updatedUserId)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update t_supplier
+        <set>
+            <if test="supcode != null and supcode != ''">
+                supCode = #{supcode},
+            </if>
+            <if test="supname != null and supname != ''">
+                supName = #{supname},
+            </if>
+            <if test="supdesc != null and supdesc != ''">
+                supDesc = #{supdesc},
+            </if>
+            <if test="supcontact != null and supcontact != ''">
+                supContact = #{supcontact},
+            </if>
+            <if test="supphone != null and supphone != ''">
+                supPhone = #{supphone},
+            </if>
+            <if test="supaddress != null and supaddress != ''">
+                supAddress = #{supaddress},
+            </if>
+            <if test="supfax != null and supfax != ''">
+                supFax = #{supfax},
+            </if>
+            <if test="createduserid != null">
+                createdUserId = #{createduserid},
+            </if>
+            <if test="createdtime != null">
+                createdTime = #{createdtime},
+            </if>
+            <if test="updatedtime != null">
+                updatedTime = #{updatedtime},
+            </if>
+            <if test="updateduserid != null">
+                updatedUserId = #{updateduserid},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from t_supplier where id = #{id}
+    </delete>
+</mapper>

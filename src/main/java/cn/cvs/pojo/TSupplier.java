@@ -1,134 +1,161 @@
 package cn.cvs.pojo;
 
-
 import java.util.Date;
+import java.io.Serializable;
 
-public class TSupplier {
+/**
+ * 药品供货商(TSupplier)实体类
+ *
+ * @author makejava
+ * @since 2023-04-07 11:42:49
+ */
+public class TSupplier implements Serializable {
+    private static final long serialVersionUID = -73769514803816947L;
+    /**
+     * 主键ID
+     */
+    private Long id;
+    /**
+     * 供货商编号
+     */
+    private String supcode;
+    /**
+     * 供货商名称
+     */
+    private String supname;
+    /**
+     * 供货商描述
+     */
+    private String supdesc;
+    /**
+     * 供货商联系人
+     */
+    private String supcontact;
+    /**
+     * 联系电话
+     */
+    private String supphone;
+    /**
+     * 供货商地址
+     */
+    private String supaddress;
+    /**
+     * 传真
+     */
+    private String supfax;
+    /**
+     * 创建人id
+     */
+    private Long createduserid;
+    /**
+     * 创建时间
+     */
+    private Date createdtime;
+    /**
+     * 修改时间
+     */
+    private Date updatedtime;
+    /**
+     * 修改人id
+     */
+    private Long updateduserid;
 
-  private Long id;
-  private String supCode;
-  private String supName;
-  private String supDesc;
-  private String supContact;
-  private String supPhone;
-  private String supAddress;
-  private String supFax;
-  private Long createdUserId;
-  private Date createdTime;
-  private Date updatedTime;
-  private Long updatedUserId;
 
-  public Long getId() {
-    return id;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public String getSupCode() {
-    return supCode;
-  }
+    public String getSupcode() {
+        return supcode;
+    }
 
-  public void setSupCode(String supCode) {
-    this.supCode = supCode;
-  }
+    public void setSupcode(String supcode) {
+        this.supcode = supcode;
+    }
 
-  public String getSupName() {
-    return supName;
-  }
+    public String getSupname() {
+        return supname;
+    }
 
-  public void setSupName(String supName) {
-    this.supName = supName;
-  }
+    public void setSupname(String supname) {
+        this.supname = supname;
+    }
 
-  public String getSupDesc() {
-    return supDesc;
-  }
+    public String getSupdesc() {
+        return supdesc;
+    }
 
-  public void setSupDesc(String supDesc) {
-    this.supDesc = supDesc;
-  }
+    public void setSupdesc(String supdesc) {
+        this.supdesc = supdesc;
+    }
 
-  public String getSupContact() {
-    return supContact;
-  }
+    public String getSupcontact() {
+        return supcontact;
+    }
 
-  public void setSupContact(String supContact) {
-    this.supContact = supContact;
-  }
+    public void setSupcontact(String supcontact) {
+        this.supcontact = supcontact;
+    }
 
-  public String getSupPhone() {
-    return supPhone;
-  }
+    public String getSupphone() {
+        return supphone;
+    }
 
-  public void setSupPhone(String supPhone) {
-    this.supPhone = supPhone;
-  }
+    public void setSupphone(String supphone) {
+        this.supphone = supphone;
+    }
 
-  public String getSupAddress() {
-    return supAddress;
-  }
+    public String getSupaddress() {
+        return supaddress;
+    }
 
-  public void setSupAddress(String supAddress) {
-    this.supAddress = supAddress;
-  }
+    public void setSupaddress(String supaddress) {
+        this.supaddress = supaddress;
+    }
 
-  public String getSupFax() {
-    return supFax;
-  }
+    public String getSupfax() {
+        return supfax;
+    }
 
-  public void setSupFax(String supFax) {
-    this.supFax = supFax;
-  }
+    public void setSupfax(String supfax) {
+        this.supfax = supfax;
+    }
 
-  public Long getCreatedUserId() {
-    return createdUserId;
-  }
+    public Long getCreateduserid() {
+        return createduserid;
+    }
 
-  public void setCreatedUserId(Long createdUserId) {
-    this.createdUserId = createdUserId;
-  }
+    public void setCreateduserid(Long createduserid) {
+        this.createduserid = createduserid;
+    }
 
-  public Date getCreatedTime() {
-    return createdTime;
-  }
+    public Date getCreatedtime() {
+        return createdtime;
+    }
 
-  public void setCreatedTime(Date createdTime) {
-    this.createdTime = createdTime;
-  }
+    public void setCreatedtime(Date createdtime) {
+        this.createdtime = createdtime;
+    }
 
-  public Date getUpdatedTime() {
-    return updatedTime;
-  }
+    public Date getUpdatedtime() {
+        return updatedtime;
+    }
 
-  public void setUpdatedTime(Date updatedTime) {
-    this.updatedTime = updatedTime;
-  }
+    public void setUpdatedtime(Date updatedtime) {
+        this.updatedtime = updatedtime;
+    }
 
-  public Long getUpdatedUserId() {
-    return updatedUserId;
-  }
+    public Long getUpdateduserid() {
+        return updateduserid;
+    }
 
-  public void setUpdatedUserId(Long updatedUserId) {
-    this.updatedUserId = updatedUserId;
-  }
+    public void setUpdateduserid(Long updateduserid) {
+        this.updateduserid = updateduserid;
+    }
 
-  @Override
-  public String toString() {
-    return "TSupplier{" +
-            "id=" + id +
-            ", supCode='" + supCode + '\'' +
-            ", supName='" + supName + '\'' +
-            ", supDesc='" + supDesc + '\'' +
-            ", supContact='" + supContact + '\'' +
-            ", supPhone='" + supPhone + '\'' +
-            ", supAddress='" + supAddress + '\'' +
-            ", supFax='" + supFax + '\'' +
-            ", createdUserId=" + createdUserId +
-            ", createdTime=" + createdTime +
-            ", updatedTime=" + updatedTime +
-            ", updatedUserId=" + updatedUserId +
-            '}';
-  }
 }
+
