@@ -11,7 +11,7 @@ import java.util.List;
  * @since 2023-04-08 10:42:15
  */
 public class TSysUser implements Serializable {
-    private static final long serialVersionUID = -84653121636859330L;
+    private static final long serialVersionUID = 143773121213304570L;
     /**
      * 主键ID
      */
@@ -48,9 +48,25 @@ public class TSysUser implements Serializable {
      * 用户角色id
      */
     private Long roleId;
+    /**
+     * 用户角色名称
+     */
+    private String userRoleName;
+    /**
+     * 创建人
+     */
     private Long createdUserId;
+    /**
+     * 创建时间
+     */
     private Date createdTime;
+    /**
+     * 修改人
+     */
     private Long updatedUserId;
+    /**
+     * 修改时间
+     */
     private Date updatedTime;
     /**
      * 角色名称
@@ -140,6 +156,7 @@ public class TSysUser implements Serializable {
 
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
+//        this.sysRole.setId(roleId);
     }
 
     /**
@@ -151,6 +168,8 @@ public class TSysUser implements Serializable {
 
     public void setSysRole(TSysRole sysRole) {
         this.sysRole = sysRole;
+        this.roleId = sysRole.getId();
+        this.realName = sysRole.getRoleName();
     }
 
     /**
@@ -206,6 +225,15 @@ public class TSysUser implements Serializable {
 
     public void setUpdatedTime(Date updatedTime) {
         this.updatedTime = updatedTime;
+    }
+
+    public String getUserRoleName() {
+        return userRoleName;
+    }
+
+    public void setUserRoleName(String userRoleName) {
+        this.userRoleName = userRoleName;
+//        this.sysRole.setRoleName(userRoleName);
     }
 }
 

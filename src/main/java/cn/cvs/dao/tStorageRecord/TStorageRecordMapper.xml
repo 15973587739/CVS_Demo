@@ -31,8 +31,45 @@
     <select id="queryRecord" resultType="TStorageRecord">
         select
           id, srCode, goodsName, goodsDesc, goodsUnit, goodsCount, totalAmount, payStatus, createdUserId, createdTime, updatedUserId, updatedTime, supplierId
-        from t_storage_record where goodsName like CONCAT ('%',#{goodsName},'%') and supplierId = #{supplierId}  and payStatus = #{payStatus}
+        from t_storage_record
+        where goodsName like CONCAT ('%',#{goodsName},'%')
+          and supplierId = #{supplierId}
+          and payStatus = #{payStatus}
     </select>
+
+    <resultMap id="storageRecordWithRoleName" type="TStorageRecord">
+        <id property="id" column="id"/>
+        <result property="supName" column="supName"/>
+    </resultMap>
+    <select id="queryWithRecord" parameterType="TStorageRecord" resultMap="storageRecordWithRoleName">
+        SELECT s.*,p.supName
+        FROM t_storage_record as s , t_supplier as p
+        where  s.supplierId = p.id
+        and goodsName like CONCAT ('%',#{goodsName},'%')
+        and supplierId = #{supplierId}
+        and payStatus = #{payStatus}
+    </select>
+
+    <resultMap id="storageRecordMapRoleName" type="TStorageRecord">
+        <id property="id" column="id"/>
+        <!--sysRole关联对象-->
+        <association property="supplier" javaType="TSupplier">
+            <id property="id" column="pid"/>
+            <result property="supCode" column="supCode"/>
+            <result property="supName" column="supName"/>
+            <result property="supContact" column="supContact"/>
+            <result property="supPhone" column="supPhone"/>
+        </association>
+    </resultMap>
+    <select id="queryRecordMap" parameterType="TStorageRecord" resultMap="storageRecordMapRoleName">
+        SELECT s.*,p.id as pid,p.supCode,p.supName,p.supContact,p.supPhone
+        FROM t_storage_record as s , t_supplier as p
+        where  s.supplierId = p.id
+          and goodsName like CONCAT ('%',#{goodsName},'%')
+          and supplierId = #{supplierId}
+          and payStatus = #{payStatus}
+    </select>
+
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="TStorageRecordMap">

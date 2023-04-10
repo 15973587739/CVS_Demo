@@ -26,6 +26,12 @@ public interface TSupplierMapper {
      */
     List<TSupplier>getTSupplierList();
 
+    /**
+     * 查询入库记录表 练习4
+     * @param tSupplier
+     * @return
+     */
+    public List<TSupplier> getSupplierReBySuId(TSupplier tSupplier);
 
     /**
      * 查询入库记录表

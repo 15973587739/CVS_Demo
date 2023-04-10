@@ -2,6 +2,7 @@ package cn.cvs.pojo;
 
 import java.util.Date;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 药品供货商(TSupplier)实体类
@@ -59,6 +60,11 @@ public class TSupplier implements Serializable {
      * 修改人id
      */
     private Long updatedUserId;
+
+    /**
+     * 入库集合
+     */
+    private List<TStorageRecord> recordList;
 
 
     public Long getId() {
@@ -157,5 +163,12 @@ public class TSupplier implements Serializable {
         this.updatedUserId = updatedUserId;
     }
 
+    public List<TStorageRecord> getRecordList() {
+        return recordList;
+    }
+
+    public void setRecordList(List<TStorageRecord> recordList) {
+        this.recordList = recordList;
+    }
 }
 

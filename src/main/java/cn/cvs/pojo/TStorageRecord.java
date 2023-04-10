@@ -65,15 +65,26 @@ public class TStorageRecord implements Serializable {
      */
     private Long supplierId;
 
+    /**
+     * 供货商名称
+     */
+    private String supName;
+    /**
+     * 供货商对象
+     */
+    private TSupplier supplier;
+
+
 
     @Override
     public String toString() {
         return "TStorageRecord{" +
-                "srcode='" + srCode + '\'' +
-                ", goodsname='" + goodsName + '\'' +
-                ", paystatus=" + payStatus +
-                ", createdtime=" + createdTime +
-                ", supplierid=" + supplierId +
+                "srCode='" + srCode + '\'' +
+                ", goodsName='" + goodsName + '\'' +
+                ", payStatus=" + payStatus +
+                ", createdTime=" + createdTime +
+                ", supplierId=" + supplierId +
+                ", supplierName=" + supName +
                 '}';
     }
 
@@ -179,7 +190,26 @@ public class TStorageRecord implements Serializable {
 
     public void setSupplierId(Long supplierId) {
         this.supplierId = supplierId;
+//        this.supplier.setId(supplierId);
     }
 
+    public TSupplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(TSupplier supplier) {
+        this.supplier = supplier;
+        this.supplierId = supplier.getId();
+        this.supName = supplier.getSupName();
+    }
+
+    public String getSupName() {
+        return supName;
+    }
+
+    public void setSupName(String supName) {
+        this.supName = supName;
+//        this.supplier.setSupName(supplierName);
+    }
 }
 

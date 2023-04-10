@@ -10,7 +10,7 @@ import java.util.List;
 public class TStorageRecordMapperTest {
 
     /**
-     * 查询入库记录
+     * 查询入库记录 练习1
      */
     @Test
     public void queryRecord() {
@@ -30,6 +30,56 @@ public class TStorageRecordMapperTest {
             MyBatisUtil.closeSqlSession(sqlSession);
         }
     }
+
+    /**
+     * 查询入库记录 练习2
+     */
+    @Test
+    public void queryWithRecord() {
+        SqlSession sqlSession=null;
+        List<TStorageRecord> recordList = null;
+        try {
+            sqlSession = MyBatisUtil.createSqlSession();
+            TStorageRecord record = new TStorageRecord();
+            record.setSupplierId(3L);
+            record.setGoodsName("米");
+            record.setPayStatus(2);
+            recordList=sqlSession.getMapper(TStorageRecordMapper.class).queryWithRecord(record);
+            recordList.forEach(u->System.out.println(u));
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            MyBatisUtil.closeSqlSession(sqlSession);
+        }
+    }
+
+    /**
+     * 查询入库记录 练习3
+     */
+    @Test
+    public void queryRecordMap() {
+        SqlSession sqlSession=null;
+        List<TStorageRecord> recordList = null;
+        try {
+            sqlSession = MyBatisUtil.createSqlSession();
+            TStorageRecord record = new TStorageRecord();
+            record.setSupplierId(3L);
+            record.setGoodsName("米");
+            record.setPayStatus(2);
+            recordList=sqlSession.getMapper(TStorageRecordMapper.class).queryRecordMap(record);
+            recordList.forEach(u->System.out.println(u));
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            MyBatisUtil.closeSqlSession(sqlSession);
+        }
+    }
+
+
+
+
+
+
     @Test
     public void queryById() {
     }
