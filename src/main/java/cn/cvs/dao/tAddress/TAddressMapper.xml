@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.cvs.dao.TAddress">
+<mapper namespace="cn.cvs.dao.tAddress.TAddressMapper">
 
-    <resultMap type="cn.cvs.dao.TAddress" id="TAddressMap">
+    <resultMap type="cn.cvs.pojo.TAddress" id="TAddressMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="contact" column="contact" jdbcType="VARCHAR"/>
-        <result property="addressdesc" column="addressDesc" jdbcType="VARCHAR"/>
+        <result property="addressDesc" column="addressDesc" jdbcType="VARCHAR"/>
         <result property="postcode" column="postCode" jdbcType="VARCHAR"/>
         <result property="tel" column="tel" jdbcType="VARCHAR"/>
-        <result property="createduserid" column="createdUserId" jdbcType="INTEGER"/>
-        <result property="createdtime" column="createdTime" jdbcType="TIMESTAMP"/>
-        <result property="updateduserid" column="updatedUserId" jdbcType="INTEGER"/>
-        <result property="updatedtime" column="updatedTime" jdbcType="TIMESTAMP"/>
+        <result property="createdUserId" column="createdUserId" jdbcType="INTEGER"/>
+        <result property="createdTime" column="createdTime" jdbcType="TIMESTAMP"/>
+        <result property="updatedUserId" column="updatedUserId" jdbcType="INTEGER"/>
+        <result property="updatedTime" column="updatedTime" jdbcType="TIMESTAMP"/>
         <result property="userid" column="userId" jdbcType="INTEGER"/>
     </resultMap>
 
@@ -35,8 +35,8 @@
             <if test="contact != null and contact != ''">
                 and contact = #{contact}
             </if>
-            <if test="addressdesc != null and addressdesc != ''">
-                and addressDesc = #{addressdesc}
+            <if test="addressDesc != null and addressDesc != ''">
+                and addressDesc = #{addressDesc}
             </if>
             <if test="postcode != null and postcode != ''">
                 and postCode = #{postcode}
@@ -44,17 +44,17 @@
             <if test="tel != null and tel != ''">
                 and tel = #{tel}
             </if>
-            <if test="createduserid != null">
-                and createdUserId = #{createduserid}
+            <if test="createdUserId != null">
+                and createdUserId = #{createdUserId}
             </if>
-            <if test="createdtime != null">
-                and createdTime = #{createdtime}
+            <if test="createdTime != null">
+                and createdTime = #{createdTime}
             </if>
-            <if test="updateduserid != null">
-                and updatedUserId = #{updateduserid}
+            <if test="updatedUserId != null">
+                and updatedUserId = #{updatedUserId}
             </if>
-            <if test="updatedtime != null">
-                and updatedTime = #{updatedtime}
+            <if test="updatedTime != null">
+                and updatedTime = #{updatedTime}
             </if>
             <if test="userid != null">
                 and userId = #{userid}
@@ -74,8 +74,8 @@
             <if test="contact != null and contact != ''">
                 and contact = #{contact}
             </if>
-            <if test="addressdesc != null and addressdesc != ''">
-                and addressDesc = #{addressdesc}
+            <if test="addressDesc != null and addressDesc != ''">
+                and addressDesc = #{addressDesc}
             </if>
             <if test="postcode != null and postcode != ''">
                 and postCode = #{postcode}
@@ -83,17 +83,17 @@
             <if test="tel != null and tel != ''">
                 and tel = #{tel}
             </if>
-            <if test="createduserid != null">
-                and createdUserId = #{createduserid}
+            <if test="createdUserId != null">
+                and createdUserId = #{createdUserId}
             </if>
-            <if test="createdtime != null">
-                and createdTime = #{createdtime}
+            <if test="createdTime != null">
+                and createdTime = #{createdTime}
             </if>
-            <if test="updateduserid != null">
-                and updatedUserId = #{updateduserid}
+            <if test="updatedUserId != null">
+                and updatedUserId = #{updatedUserId}
             </if>
-            <if test="updatedtime != null">
-                and updatedTime = #{updatedtime}
+            <if test="updatedTime != null">
+                and updatedTime = #{updatedTime}
             </if>
             <if test="userid != null">
                 and userId = #{userid}
@@ -104,14 +104,14 @@
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into t_address(contact, addressDesc, postCode, tel, createdUserId, createdTime, updatedUserId, updatedTime, userId)
-        values (#{contact}, #{addressdesc}, #{postcode}, #{tel}, #{createduserid}, #{createdtime}, #{updateduserid}, #{updatedtime}, #{userid})
+        values (#{contact}, #{addressDesc}, #{postcode}, #{tel}, #{createdUserId}, #{createdTime}, #{updatedUserId}, #{updatedTime}, #{userid})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
         insert into t_address(contact, addressDesc, postCode, tel, createdUserId, createdTime, updatedUserId, updatedTime, userId)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.contact}, #{entity.addressdesc}, #{entity.postcode}, #{entity.tel}, #{entity.createduserid}, #{entity.createdtime}, #{entity.updateduserid}, #{entity.updatedtime}, #{entity.userid})
+        (#{entity.contact}, #{entity.addressDesc}, #{entity.postcode}, #{entity.tel}, #{entity.createdUserId}, #{entity.createdTime}, #{entity.updatedUserId}, #{entity.updatedTime}, #{entity.userid})
         </foreach>
     </insert>
 
@@ -119,7 +119,7 @@
         insert into t_address(contact, addressDesc, postCode, tel, createdUserId, createdTime, updatedUserId, updatedTime, userId)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.contact}, #{entity.addressdesc}, #{entity.postcode}, #{entity.tel}, #{entity.createduserid}, #{entity.createdtime}, #{entity.updateduserid}, #{entity.updatedtime}, #{entity.userid})
+            (#{entity.contact}, #{entity.addressDesc}, #{entity.postcode}, #{entity.tel}, #{entity.createdUserId}, #{entity.createdTime}, #{entity.updatedUserId}, #{entity.updatedTime}, #{entity.userid})
         </foreach>
         on duplicate key update
         contact = values(contact),
@@ -140,8 +140,8 @@
             <if test="contact != null and contact != ''">
                 contact = #{contact},
             </if>
-            <if test="addressdesc != null and addressdesc != ''">
-                addressDesc = #{addressdesc},
+            <if test="addressDesc != null and addressDesc != ''">
+                addressDesc = #{addressDesc},
             </if>
             <if test="postcode != null and postcode != ''">
                 postCode = #{postcode},
@@ -149,17 +149,17 @@
             <if test="tel != null and tel != ''">
                 tel = #{tel},
             </if>
-            <if test="createduserid != null">
-                createdUserId = #{createduserid},
+            <if test="createdUserId != null">
+                createdUserId = #{createdUserId},
             </if>
-            <if test="createdtime != null">
-                createdTime = #{createdtime},
+            <if test="createdTime != null">
+                createdTime = #{createdTime},
             </if>
-            <if test="updateduserid != null">
-                updatedUserId = #{updateduserid},
+            <if test="updatedUserId != null">
+                updatedUserId = #{updatedUserId},
             </if>
-            <if test="updatedtime != null">
-                updatedTime = #{updatedtime},
+            <if test="updatedTime != null">
+                updatedTime = #{updatedTime},
             </if>
             <if test="userid != null">
                 userId = #{userid},

@@ -83,8 +83,8 @@
               <option name="name" value="TAddress" />
               <option name="preName" value="" />
               <option name="saveModelName" value="CVS_Demo" />
-              <option name="savePackageName" value="" />
-              <option name="savePath" value="./src/main/java" />
+              <option name="savePackageName" value="cn.cvs_test" />
+              <option name="savePath" value="./src/main/java/cn/cvs_test" />
               <option name="templateGroupName" value="Default" />
             </TableInfoDTO>
           </value>
@@ -191,8 +191,8 @@
               <option name="name" value="TStorageRecord" />
               <option name="preName" value="" />
               <option name="saveModelName" value="CVS_Demo" />
-              <option name="savePackageName" value="cn.cvs.dao" />
-              <option name="savePath" value="./src/main/java/cn/cvs/dao" />
+              <option name="savePackageName" value="cn.cvs_test" />
+              <option name="savePath" value="./src/main/java/cn/cvs_test" />
               <option name="templateGroupName" value="Default" />
             </TableInfoDTO>
           </value>
@@ -292,8 +292,8 @@
               <option name="name" value="TSupplier" />
               <option name="preName" value="" />
               <option name="saveModelName" value="CVS_Demo" />
-              <option name="savePackageName" value="cn.cvs.pojo" />
-              <option name="savePath" value="./src/main/java/cn/cvs/pojo" />
+              <option name="savePackageName" value="cn.cvs_test" />
+              <option name="savePath" value="./src/main/java/cn/cvs_test" />
               <option name="templateGroupName" value="Default" />
             </TableInfoDTO>
           </value>
@@ -358,8 +358,8 @@
               <option name="name" value="TSysRole" />
               <option name="preName" value="" />
               <option name="saveModelName" value="CVS_Demo" />
-              <option name="savePackageName" value="cn.cvs.dao.TSysRole" />
-              <option name="savePath" value="./src/main/java/cn/cvs/dao/TSysRole" />
+              <option name="savePackageName" value="cn.cvs_test" />
+              <option name="savePath" value="./src/main/java/cn/cvs_test" />
               <option name="templateGroupName" value="Default" />
             </TableInfoDTO>
           </value>
@@ -466,8 +466,8 @@
               <option name="name" value="TSysUser" />
               <option name="preName" value="" />
               <option name="saveModelName" value="CVS_Demo" />
-              <option name="savePackageName" value="" />
-              <option name="savePath" value="./src/main/java" />
+              <option name="savePackageName" value="cn.cvs_test" />
+              <option name="savePath" value="./src/main/java/cn/cvs_test" />
               <option name="templateGroupName" value="Default" />
             </TableInfoDTO>
           </value>

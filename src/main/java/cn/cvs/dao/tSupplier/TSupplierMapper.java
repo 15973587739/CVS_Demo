@@ -1,4 +1,4 @@
-package cn.cvs.dao.TSupplier;
+package cn.cvs.dao.tSupplier;
 
 import cn.cvs.pojo.TSupplier;
 import org.apache.ibatis.annotations.Param;

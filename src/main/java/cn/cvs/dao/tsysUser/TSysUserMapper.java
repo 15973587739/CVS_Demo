@@ -1,4 +1,4 @@
-package cn.cvs.dao.sysUser;
+package cn.cvs.dao.tsysUser;
 
 import cn.cvs.pojo.TSysUser;
 import org.apache.ibatis.annotations.Param;
@@ -7,7 +7,7 @@ import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Map;
 
-public interface SysUserMapper {
+public interface TSysUserMapper {
     /**
      * 统计用户数量的方法
      */

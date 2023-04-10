@@ -1,4 +1,4 @@
-package cn.cvs.dao.TStorageRecord;
+package cn.cvs.dao.tStorageRecord;
 
 import cn.cvs.pojo.TStorageRecord;
 import org.apache.ibatis.annotations.Param;

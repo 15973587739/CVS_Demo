@@ -1,6 +1,6 @@
-package cn.cvs.dao.sysUser;
+package cn.cvs.dao.tsysUser;
 
-import cn.cvs.dao.TSupplier.TSupplierMapperTest;
+import cn.cvs.dao.tSupplier.TSupplierMapperTest;
 import cn.cvs.pojo.TAddress;
 import cn.cvs.pojo.TSysUser;
 import cn.cvs.utils.MyBatisUtil;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class SysUserMapperTest {
+public class TSysUserMapperTest {
     Logger logger =Logger.getLogger(TSupplierMapperTest.class);
 
 
@@ -27,7 +27,7 @@ public class SysUserMapperTest {
         SqlSession sqlSession=null;
         try {
             sqlSession= MyBatisUtil.createSqlSession();
-            int count = sqlSession.getMapper(SysUserMapper.class).count();
+            int count = sqlSession.getMapper(TSysUserMapper.class).count();
             System.out.println("数量" + count);
         }catch (Exception e){
             e.printStackTrace();
@@ -46,7 +46,7 @@ public class SysUserMapperTest {
         List<TSysUser> userList=null;
         try {
             sqlSession=MyBatisUtil.createSqlSession();
-            userList = sqlSession.getMapper(SysUserMapper.class).getUserList();
+            userList = sqlSession.getMapper(TSysUserMapper.class).getUserList();
         }catch (Exception e){
             e.printStackTrace();
         }finally {
@@ -54,9 +54,7 @@ public class SysUserMapperTest {
         }
         if (userList!=null){
             for (TSysUser user : userList){
-                System.out.println(
-                        "testUserListQuery account:"+user.getAccount()
-                                +"and realName:"+user.getRealname());
+                System.out.println("testUserListQuery account:"+user.getAccount() +"and realName:"+user.getRealName());
             }
         }
     }
@@ -71,7 +69,7 @@ public class SysUserMapperTest {
         List<TSysUser> userList=null;
         try {
             sqlSession=MyBatisUtil.createSqlSession();
-            userList=sqlSession.getMapper(SysUserMapper.class).getUsersByRealName("李");
+            userList=sqlSession.getMapper(TSysUserMapper.class).getUsersByRealName("李");
             userList.forEach(u->System.out.println(u));
         }catch (Exception e){
             e.printStackTrace();
@@ -91,9 +89,9 @@ public class SysUserMapperTest {
         try {
             sqlSession=MyBatisUtil.createSqlSession();
             TSysUser user = new TSysUser();
-            user.setRealname("李");
-            user.setRoleid(3L);
-            userList=sqlSession.getMapper(SysUserMapper.class).getUsersByPojo(user);
+            user.setRealName("李");
+            user.setRoleId(3L);
+            userList=sqlSession.getMapper(TSysUserMapper.class).getUsersByPojo(user);
             userList.forEach(u->System.out.println(u));
         }catch (Exception e){
             e.printStackTrace();
@@ -115,7 +113,7 @@ public class SysUserMapperTest {
             Map<String, Object> userMap = new HashMap<String,Object>();
             userMap.put("rName","赵");
             userMap.put("rId",2);
-            userList=sqlSession.getMapper(SysUserMapper.class).getUsersByMap(userMap);
+            userList=sqlSession.getMapper(TSysUserMapper.class).getUsersByMap(userMap);
             userList.forEach(u->System.out.println(u));
         }catch (Exception e){
             e.printStackTrace();
@@ -134,7 +132,7 @@ public class SysUserMapperTest {
         List<TSysUser> userList=null;
         try {
             sqlSession=MyBatisUtil.createSqlSession();
-            userList=sqlSession.getMapper(SysUserMapper.class).getUsersByParams("赵",2);
+            userList=sqlSession.getMapper(TSysUserMapper.class).getUsersByParams("赵",2);
             userList.forEach(u->System.out.println(u));
         }catch (Exception e){
             e.printStackTrace();
@@ -150,9 +148,9 @@ public class SysUserMapperTest {
         try {
             sqlSession=MyBatisUtil.createSqlSession();
             TSysUser sysUser=new TSysUser();
-            sysUser.setRealname("李");
-            sysUser.setRoleid(3L);
-            userList=sqlSession.getMapper(SysUserMapper.class).getUserListWithRoleName(sysUser);
+            sysUser.setRealName("李");
+            sysUser.setRoleId(3L);
+            userList=sqlSession.getMapper(TSysUserMapper.class).getUserListWithRoleName(sysUser);
             userList.forEach(user -> System.out.println(user));
         }catch (Exception e){
             e.printStackTrace();
@@ -166,13 +164,13 @@ public class SysUserMapperTest {
         List<TSysUser> userList=null;
         try {
             sqlSession=MyBatisUtil.createSqlSession();
-            userList=sqlSession.getMapper(SysUserMapper.class).getUserListByRoleId(2);
+            userList=sqlSession.getMapper(TSysUserMapper.class).getUserListByRoleId(2);
             for (TSysUser user:userList){
                 System.out.println("testGetUserList userId:"+user.getId()+
-                        "and realName:"+user.getRealname()+
+                        "and realName:"+user.getRealName()+
                         "and roleId:"+user.getSysRole().getId()+
                         "and code:"+user.getSysRole().getCode()+
-                        "and roleName:"+user.getSysRole().getRolename());
+                        "and roleName:"+user.getSysRole().getRoleName());
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -185,14 +183,14 @@ public class SysUserMapperTest {
         SqlSession sqlSession=null;
         try {
             sqlSession=MyBatisUtil.createSqlSession();
-            List<TSysUser> userList=sqlSession.getMapper(SysUserMapper.class).getUserAddressesByUserId(1);
+            List<TSysUser> userList=sqlSession.getMapper(TSysUserMapper.class).getUserAddressesByUserId(1);
             for (TSysUser user:userList){
                 logger.debug("userList(include:addresslist)=====>account:"
-                        +user.getAccount()+",realName:"+user.getRealname());
+                        +user.getAccount()+",realName:"+user.getRealName());
                 for (TAddress address:user.getAddressList()){
                     logger.debug("address ----> id:"+address.getId()
                             +", contact:"+address.getContact()
-                            +"addressDesc:"+address.getAddressdesc()
+                            +"addressDesc:"+address.getAddressDesc()
                             +",tel:"+address.getTel()
                             +",postCode:"+address.getPostcode());
                 }
@@ -212,17 +210,17 @@ public class SysUserMapperTest {
             sqlSession=MyBatisUtil.createSqlSession();
             TSysUser user=new TSysUser();
             user.setAccount("test");
-            user.setRealname("测试用户");
+            user.setRealName("测试用户");
             user.setPassword("1234567");
             Date birthday=new SimpleDateFormat("yyyy-MM-dd").parse("2003-10-23");
             user.setBirthday(birthday);
             user.setAddress("测试地址");
             user.setSex(1);
             user.setPhone("12334567886");
-            user.setRoleid(1L);
-            user.setUpdateduserid(4L);
-            user.setUpdatedtime(new Date());
-            count=sqlSession.getMapper(SysUserMapper.class).add(user);
+            user.setRoleId(1L);
+            user.setUpdatedUserId(4L);
+            user.setUpdatedTime(new Date());
+            count=sqlSession.getMapper(TSysUserMapper.class).add(user);
             sqlSession.commit();
         }catch (Exception e){
             sqlSession.rollback();
@@ -240,18 +238,18 @@ public class SysUserMapperTest {
             sqlSession=MyBatisUtil.createSqlSession();
             TSysUser user=new TSysUser();
             user.setAccount("test");
-            user.setRealname("测试用户");
+            user.setRealName("测试用户");
             user.setPassword("1234567");
             Date birthday=new SimpleDateFormat("yyyy-MM-dd").parse("2003-10-23");
             user.setBirthday(birthday);
             user.setAddress("测试地址");
             user.setSex(1);
             user.setPhone("12334567886");
-            user.setRoleid(1L);
-            user.setUpdateduserid(4L);
-            user.setUpdatedtime(new Date());
+            user.setRoleId(1L);
+            user.setUpdatedUserId(4L);
+            user.setUpdatedTime(new Date());
             user.setId(19L);
-            count=sqlSession.getMapper(SysUserMapper.class).modify(user);
+            count=sqlSession.getMapper(TSysUserMapper.class).modify(user);
             sqlSession.commit();
         }catch (Exception e){
             sqlSession.rollback();
@@ -263,14 +261,14 @@ public class SysUserMapperTest {
     }
     @Test
     public void testUpdatePwd(){
-        logger.debug("testUpdatePwd!==================");
+        logger.debug("testUpdatePwd!================");
         SqlSession sqlSession=null;
-        String pwd="888888";
-        Integer id=17;
+        String pwd="555555";
+        Integer id=15;
         int count=0;
         try {
             sqlSession=MyBatisUtil.createSqlSession();
-            count=sqlSession.getMapper(SysUserMapper.class).updatePwd(id,pwd);
+            count=sqlSession.getMapper(TSysUserMapper.class).updatePwd(id,pwd);
             sqlSession.commit();
         }catch (Exception e){
             e.printStackTrace();
@@ -288,7 +286,7 @@ public class SysUserMapperTest {
         int count=0;
         try {
             sqlSession=MyBatisUtil.createSqlSession();
-            count=sqlSession.getMapper(SysUserMapper.class).deleteUserById(id);
+            count=sqlSession.getMapper(TSysUserMapper.class).deleteUserById(id);
             sqlSession.commit();
         }catch (Exception e){
             e.printStackTrace();

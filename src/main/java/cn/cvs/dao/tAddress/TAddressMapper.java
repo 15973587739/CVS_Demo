@@ -1,18 +1,20 @@
-package cn.cvs.dao.TSysRole;
+package cn.cvs.dao.tAddress;
 
-import cn.cvs.pojo.TSysRole;
+
+
+import cn.cvs.pojo.TAddress;
 import org.apache.ibatis.annotations.Param;
 
 import java.awt.print.Pageable;
 import java.util.List;
 
 /**
- * 系统角色(TSysRole)表数据库访问层
+ * (TAddress)表数据库访问层
  *
  * @author makejava
- * @since 2023-04-07 11:58:56
+ * @since 2023-04-08 10:46:42
  */
-public interface TSysRoleMapper {
+public interface TAddressMapper {
 
     /**
      * 通过ID查询单条数据
@@ -20,56 +22,56 @@ public interface TSysRoleMapper {
      * @param id 主键
      * @return 实例对象
      */
-    TSysRole queryById(Long id);
+    TAddress queryById(Long id);
 
     /**
      * 查询指定行数据
      *
-     * @param tSysRole 查询条件
+     * @param tAddress 查询条件
      * @param pageable         分页对象
      * @return 对象列表
      */
-    List<TSysRole> queryAllByLimit(TSysRole tSysRole, @Param("pageable") Pageable pageable);
+    List<TAddress> queryAllByLimit(TAddress tAddress, @Param("pageable") Pageable pageable);
 
     /**
      * 统计总行数
      *
-     * @param tSysRole 查询条件
+     * @param tAddress 查询条件
      * @return 总行数
      */
-    long count(TSysRole tSysRole);
+    long count(TAddress tAddress);
 
     /**
      * 新增数据
      *
-     * @param tSysRole 实例对象
+     * @param tAddress 实例对象
      * @return 影响行数
      */
-    int insert(TSysRole tSysRole);
+    int insert(TAddress tAddress);
 
     /**
      * 批量新增数据（MyBatis原生foreach方法）
      *
-     * @param entities List<TSysRole> 实例对象列表
+     * @param entities List<TAddress> 实例对象列表
      * @return 影响行数
      */
-    int insertBatch(@Param("entities") List<TSysRole> entities);
+    int insertBatch(@Param("entities") List<TAddress> entities);
 
     /**
      * 批量新增或按主键更新数据（MyBatis原生foreach方法）
      *
-     * @param entities List<TSysRole> 实例对象列表
+     * @param entities List<TAddress> 实例对象列表
      * @return 影响行数
      */
-    int insertOrUpdateBatch(@Param("entities") List<TSysRole> entities);
+    int insertOrUpdateBatch(@Param("entities") List<TAddress> entities);
 
     /**
      * 修改数据
      *
-     * @param tSysRole 实例对象
+     * @param tAddress 实例对象
      * @return 影响行数
      */
-    int update(TSysRole tSysRole);
+    int update(TAddress tAddress);
 
     /**
      * 通过主键删除数据

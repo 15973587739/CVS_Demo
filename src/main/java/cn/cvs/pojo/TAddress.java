@@ -22,7 +22,7 @@ public class TAddress implements Serializable {
     /**
      * 收货地址明细
      */
-    private String addressdesc;
+    private String addressDesc;
     /**
      * 邮编
      */
@@ -34,7 +34,7 @@ public class TAddress implements Serializable {
     /**
      * 创建者
      */
-    private Long createduserid;
+    private Long createdUserId;
     /**
      * 创建时间
      */
@@ -69,12 +69,12 @@ public class TAddress implements Serializable {
         this.contact = contact;
     }
 
-    public String getAddressdesc() {
-        return addressdesc;
+    public String getAddressDesc() {
+        return addressDesc;
     }
 
-    public void setAddressdesc(String addressdesc) {
-        this.addressdesc = addressdesc;
+    public void setAddressDesc(String addressDesc) {
+        this.addressDesc = addressDesc;
     }
 
     public String getPostcode() {
@@ -93,12 +93,12 @@ public class TAddress implements Serializable {
         this.tel = tel;
     }
 
-    public Long getCreateduserid() {
-        return createduserid;
+    public Long getCreatedUserId() {
+        return createdUserId;
     }
 
-    public void setCreateduserid(Long createduserid) {
-        this.createduserid = createduserid;
+    public void setCreatedUserId(Long createdUserId) {
+        this.createdUserId = createdUserId;
     }
 
     public Date getCreatedtime() {

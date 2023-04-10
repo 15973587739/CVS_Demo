@@ -18,62 +18,62 @@ public class TStorageRecord implements Serializable {
     /**
      * 入库记录编码
      */
-    private String srcode;
+    private String srCode;
     /**
      * 商品名称
      */
-    private String goodsname;
+    private String goodsName;
     /**
      * 商品描述
      */
-    private String goodsdesc;
+    private String goodsDesc;
     /**
      * 商品单位
      */
-    private String goodsunit;
+    private String goodsUnit;
     /**
      * 入库数量
      */
-    private Double goodscount;
+    private Double goodsCount;
     /**
      * 入库商品总额
      */
-    private Double totalamount;
+    private Double totalAmount;
     /**
      * 支付状态（1：未支付 2：已支付）
      */
-    private Integer paystatus;
+    private Integer payStatus;
     /**
      * 创建人id
      */
-    private Long createduserid;
+    private Long createdUserId;
     /**
      * 创建时间
      */
-    private Date createdtime;
+    private Date createdTime;
     /**
      * 修改人id
      */
-    private Long updateduserid;
+    private Long updatedUserId;
     /**
      * 修改时间
      */
-    private Date updatedtime;
+    private Date updatedTime;
 
     /**
      * 供货商ID
      */
-    private Long supplierid;
+    private Long supplierId;
 
 
     @Override
     public String toString() {
         return "TStorageRecord{" +
-                "srcode='" + srcode + '\'' +
-                ", goodsname='" + goodsname + '\'' +
-                ", paystatus=" + paystatus +
-                ", createdtime=" + createdtime +
-                ", supplierid=" + supplierid +
+                "srcode='" + srCode + '\'' +
+                ", goodsname='" + goodsName + '\'' +
+                ", paystatus=" + payStatus +
+                ", createdtime=" + createdTime +
+                ", supplierid=" + supplierId +
                 '}';
     }
 
@@ -85,100 +85,100 @@ public class TStorageRecord implements Serializable {
         this.id = id;
     }
 
-    public String getSrcode() {
-        return srcode;
+    public String getSrCode() {
+        return srCode;
     }
 
-    public void setSrcode(String srcode) {
-        this.srcode = srcode;
+    public void setSrCode(String srCode) {
+        this.srCode = srCode;
     }
 
-    public String getGoodsname() {
-        return goodsname;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setGoodsname(String goodsname) {
-        this.goodsname = goodsname;
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 
-    public String getGoodsdesc() {
-        return goodsdesc;
+    public String getGoodsDesc() {
+        return goodsDesc;
     }
 
-    public void setGoodsdesc(String goodsdesc) {
-        this.goodsdesc = goodsdesc;
+    public void setGoodsDesc(String goodsDesc) {
+        this.goodsDesc = goodsDesc;
     }
 
-    public String getGoodsunit() {
-        return goodsunit;
+    public String getGoodsUnit() {
+        return goodsUnit;
     }
 
-    public void setGoodsunit(String goodsunit) {
-        this.goodsunit = goodsunit;
+    public void setGoodsUnit(String goodsUnit) {
+        this.goodsUnit = goodsUnit;
     }
 
-    public Double getGoodscount() {
-        return goodscount;
+    public Double getGoodsCount() {
+        return goodsCount;
     }
 
-    public void setGoodscount(Double goodscount) {
-        this.goodscount = goodscount;
+    public void setGoodsCount(Double goodsCount) {
+        this.goodsCount = goodsCount;
     }
 
-    public Double getTotalamount() {
-        return totalamount;
+    public Double getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setTotalamount(Double totalamount) {
-        this.totalamount = totalamount;
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
-    public Integer getPaystatus() {
-        return paystatus;
+    public Integer getPayStatus() {
+        return payStatus;
     }
 
-    public void setPaystatus(Integer paystatus) {
-        this.paystatus = paystatus;
+    public void setPayStatus(Integer payStatus) {
+        this.payStatus = payStatus;
     }
 
-    public Long getCreateduserid() {
-        return createduserid;
+    public Long getCreatedUserId() {
+        return createdUserId;
     }
 
-    public void setCreateduserid(Long createduserid) {
-        this.createduserid = createduserid;
+    public void setCreatedUserId(Long createdUserId) {
+        this.createdUserId = createdUserId;
     }
 
-    public Date getCreatedtime() {
-        return createdtime;
+    public Date getCreatedTime() {
+        return createdTime;
     }
 
-    public void setCreatedtime(Date createdtime) {
-        this.createdtime = createdtime;
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
-    public Long getUpdateduserid() {
-        return updateduserid;
+    public Long getUpdatedUserId() {
+        return updatedUserId;
     }
 
-    public void setUpdateduserid(Long updateduserid) {
-        this.updateduserid = updateduserid;
+    public void setUpdatedUserId(Long updatedUserId) {
+        this.updatedUserId = updatedUserId;
     }
 
-    public Date getUpdatedtime() {
-        return updatedtime;
+    public Date getUpdatedTime() {
+        return updatedTime;
     }
 
-    public void setUpdatedtime(Date updatedtime) {
-        this.updatedtime = updatedtime;
+    public void setUpdatedTime(Date updatedTime) {
+        this.updatedTime = updatedTime;
     }
 
-    public Long getSupplierid() {
-        return supplierid;
+    public Long getSupplierId() {
+        return supplierId;
     }
 
-    public void setSupplierid(Long supplierid) {
-        this.supplierid = supplierid;
+    public void setSupplierId(Long supplierId) {
+        this.supplierId = supplierId;
     }
 
 }

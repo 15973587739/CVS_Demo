@@ -2,54 +2,61 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.cvs.dao.sysUser.SysUserMapper">
-    <resultMap type="cn.cvs.pojo.SysUser" id="TSysUserMap">
+<mapper namespace="cn.cvs.dao.tsysUser.TSysUserMapper">
+    <!--属性-->
+    <resultMap type="cn.cvs.pojo.TSysUser" id="TSysUserMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="account" column="account" jdbcType="VARCHAR"/>
-        <result property="realname" column="realName" jdbcType="VARCHAR"/>
+        <result property="realName" column="realName" jdbcType="VARCHAR"/>
         <result property="password" column="password" jdbcType="VARCHAR"/>
         <result property="sex" column="sex" jdbcType="INTEGER"/>
         <result property="birthday" column="birthday" jdbcType="TIMESTAMP"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="address" column="address" jdbcType="VARCHAR"/>
-        <result property="roleid" column="roleId" jdbcType="INTEGER"/>
-        <result property="createduserid" column="createdUserId" jdbcType="INTEGER"/>
-        <result property="createdtime" column="createdTime" jdbcType="TIMESTAMP"/>
-        <result property="updateduserid" column="updatedUserId" jdbcType="INTEGER"/>
-        <result property="updatedtime" column="updatedTime" jdbcType="TIMESTAMP"/>
+        <result property="roleId" column="roleId" jdbcType="INTEGER"/>
+        <result property="createdUserId" column="createdUserId" jdbcType="INTEGER"/>
+        <result property="createdTime" column="createdTime" jdbcType="TIMESTAMP"/>
+        <result property="updatedUserId" column="updatedUserId" jdbcType="INTEGER"/>
+        <result property="updatedTime" column="updatedTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <select id="count" resultType="int">
         select count(*) from t_sys_user
     </select>
-    <select id="getUserList" resultType="SysUser">
+
+    <select id="getUserList" resultType="TSysUser">
         select * from t_sys_user
     </select>
-    <select id="getUsersByRealName" resultType="SysUser" parameterType="String">
-        select * from t_sys_user where realName like CONCAT('%', #{param},'%')
-    </select>
-    <select id="getUsersByPojo" resultType="SysUser" parameterType="SysUser">
-        select * from t_sys_user where realName like CONCAT('%', #{realName},'%') and roleId = ${roleId}
-    </select>
-    <select id="getUsersByMap" resultType="SysUser" parameterType="SysUser">
-        select * from t_sys_user where realName like CONCAT('%', #{rName},'%') and roleId = ${rId}
-    </select>
-    <select id="getUsersByParams" resultType="SysUser">
-        select * from t_sys_user where realName like CONCAT('%', #{reName},'%') and roleId = ${roId}
+
+    <select id="getUsersByRealName" resultType="TSysUser" parameterType="String">
+        select * from t_sys_user where realName like CONCAT ('%',#{param},'%')
     </select>
 
-    <resultMap id="userWithRoleName" type="sysuser">
+    <select id="getUsersByPojo" resultType="TSysUser" parameterType="TSysUser">
+        select * from t_sys_user where realName like CONCAT ('%',#{realName},'%') and roleId=#{roleId}
+    </select>
+
+    <select id="getUsersByMap" resultType="TSysUser" parameterType="map">
+        select * from t_sys_user where realName like CONCAT ('%',#{rName},'%') and roleId=#{rId}
+    </select>
+
+    <select id="getUsersByParams" resultType="TSysUser" parameterType="TSysUser">
+         select * from t_sys_user where realName like CONCAT ('%',#{reName},'%') and roleId=#{roId}
+    </select>
+
+    <resultMap id="userWithRoleName" type="TSysUser">
         <id property="id" column="id"/>
         <result property="userRoleName" column="roleName"/>
     </resultMap>
-    <select id="getUserListWithRoleName" parameterType="SysUser" resultMap="userWithRoleName">
+    <select id="getUserListWithRoleName" parameterType="TSysUser" resultMap="userWithRoleName">
         select u.*,r.roleName from t_sys_user u,t_sys_role r where u.realName like CONCAT('%',#{realName},'%') and u.roleId = #{roleId} and u.roleId=r.id
     </select>
 
-    <resultMap id="userWithSysRole" type="SysUser">
+    <resultMap id="userWithSysRole" type="TSysRole">
         <id property="id" column="id"/>
         <result property="realName" column="realName"/>
-        <association property="sysRole" javaType="sysrole">
+        <!--sysRole关联对象-->
+        <association property="sysRole" javaType="TSysRole">
             <id property="id" column="rid"/>
             <result property="code" column="code"/>
             <result property="roleName" column="roleName"/>
@@ -59,15 +66,20 @@
         select u.*,r.id as rid,r.code,r.roleName from  t_sys_user u,t_sys_role r where u.roleId = #{roleId} and u.roleId=r.id
     </select>
 
-    <resultMap id="userWithAddresses" type="sysuser">
+    <resultMap id="userWithAddresses" type="TSysUser">
         <id property="id" column="id"/>
-        <result property="account" column="account"/>
         <result property="realName" column="realName"/>
-        <collection property="addressList" ofType="address">
+        <association property="sysRole" javaType="TSysRole">
+            <id property="id" column="rid"/>
+            <result property="roleName" column="roleName"/>
+            <result property="createdTime" column="createdTime"/>
+        </association>
+        <!--    对象集合    -->
+        <collection property="addressList" ofType="TAddress">
             <id property="id" column="aid"/>
             <result property="contact" column="contact"/>
             <result property="addressDesc" column="addressDesc"/>
-            <result property="postCode" column="postCode"/>
+            <result property="postcode" column="postCode"/>
             <result property="tel" column="tel"/>
         </collection>
     </resultMap>
@@ -76,13 +88,29 @@
         select u.*,a.id as aid,a.contact,a.addressDesc,a.postCode,a.tel from t_sys_user u,t_address a where u.id = a.userId and u.id=#{userId};
     </select>
 
-    <insert id="add" parameterType="SysUser">
+
+    <insert id="add" parameterType="TSysUser">
         insert into t_sys_user(account, realName, password, sex, birthday, phone, address, roleId, createdUserId, createdTime)
         values(#{account},#{realName},#{password}, #{sex},#{birthday},#{phone},#{address},#{roleId},#{createdUserId},#{createdTime})
     </insert>
 
+    <update id="modify" parameterType="TSysUser">
+        update t_sys_user set account=#{account},realName=#{realName},password=#{password},sex=#{sex},phone=#{phone},address=#{address},
+        birthday=#{birthday},roleId=#{roleId},updatedUserId=#{updatedUserId},updatedTime=#{updatedTime}
+        where id=#{id}
+    </update>
+
+    <update id="updatePwd">
+        update t_sys_user set password=#{password} where id=#{id}
+    </update>
+
+    <delete id="deleteUserById" parameterType="integer">
+        delete  from t_sys_user where id=#{id}
+    </delete>
 
 
+        <!---->
+        <!---->
     <!--查询单个-->
     <select id="queryById" resultMap="TSysUserMap">
         select
@@ -103,7 +131,7 @@
             <if test="account != null and account != ''">
                 and account = #{account}
             </if>
-            <if test="realname != null and realname != ''">
+            <if test="realName != null and realName != ''">
                 and realName = #{realname}
             </if>
             <if test="password != null and password != ''">
@@ -121,27 +149,27 @@
             <if test="address != null and address != ''">
                 and address = #{address}
             </if>
-            <if test="roleid != null">
+            <if test="roleId != null">
                 and roleId = #{roleid}
             </if>
-            <if test="createduserid != null">
-                and createdUserId = #{createduserid}
+            <if test="createdUserId != null">
+                and createdUserId = #{createdUserId}
             </if>
-            <if test="createdtime != null">
-                and createdTime = #{createdtime}
+            <if test="createdTime != null">
+                and createdTime = #{createdTime}
             </if>
-            <if test="updateduserid != null">
-                and updatedUserId = #{updateduserid}
+            <if test="updatedUserId != null">
+                and updatedUserId = #{updatedUserId}
             </if>
-            <if test="updatedtime != null">
-                and updatedTime = #{updatedtime}
+            <if test="updatedTime != null">
+                and updatedTime = #{updatedTime}
             </if>
         </where>
         limit #{pageable.offset}, #{pageable.pageSize}
     </select>
 
     <!--统计总行数-->
-    <select id="count" resultType="java.lang.Long">
+    <select id="countS" resultType="java.lang.Long">
         select count(1)
         from t_sys_user
         <where>
@@ -151,8 +179,8 @@
             <if test="account != null and account != ''">
                 and account = #{account}
             </if>
-            <if test="realname != null and realname != ''">
-                and realName = #{realname}
+            <if test="realName != null and realName != ''">
+                and realName = #{realName}
             </if>
             <if test="password != null and password != ''">
                 and password = #{password}
@@ -169,20 +197,20 @@
             <if test="address != null and address != ''">
                 and address = #{address}
             </if>
-            <if test="roleid != null">
-                and roleId = #{roleid}
+            <if test="roleId != null">
+                and roleId = #{roleId}
             </if>
-            <if test="createduserid != null">
-                and createdUserId = #{createduserid}
+            <if test="createdUserId != null">
+                and createdUserId = #{createdUserId}
             </if>
-            <if test="createdtime != null">
-                and createdTime = #{createdtime}
+            <if test="createdTime != null">
+                and createdTime = #{createdTime}
             </if>
-            <if test="updateduserid != null">
-                and updatedUserId = #{updateduserid}
+            <if test="updatedUserId != null">
+                and updatedUserId = #{updatedUserId}
             </if>
-            <if test="updatedtime != null">
-                and updatedTime = #{updatedtime}
+            <if test="updatedTime != null">
+                and updatedTime = #{updatedTime}
             </if>
         </where>
     </select>
@@ -229,8 +257,8 @@
             <if test="account != null and account != ''">
                 account = #{account},
             </if>
-            <if test="realname != null and realname != ''">
-                realName = #{realname},
+            <if test="realName != null and realName != ''">
+                realName = #{realName},
             </if>
             <if test="password != null and password != ''">
                 password = #{password},
@@ -247,20 +275,20 @@
             <if test="address != null and address != ''">
                 address = #{address},
             </if>
-            <if test="roleid != null">
-                roleId = #{roleid},
+            <if test="roleId != null">
+                roleId = #{roleId},
             </if>
-            <if test="createduserid != null">
-                createdUserId = #{createduserid},
+            <if test="createdUserId != null">
+                createdUserId = #{createdUserId},
             </if>
-            <if test="createdtime != null">
-                createdTime = #{createdtime},
+            <if test="createdTime != null">
+                createdTime = #{createdTime},
             </if>
-            <if test="updateduserid != null">
-                updatedUserId = #{updateduserid},
+            <if test="updatedUserId != null">
+                updatedUserId = #{updatedUserId},
             </if>
-            <if test="updatedtime != null">
-                updatedTime = #{updatedtime},
+            <if test="updatedTime != null">
+                updatedTime = #{updatedTime},
             </if>
         </set>
         where id = #{id}
@@ -270,5 +298,4 @@
     <delete id="deleteById">
         delete from t_sys_user where id = #{id}
     </delete>
-
 </mapper>

@@ -18,23 +18,23 @@ public class TSupplier implements Serializable {
     /**
      * 供货商编号
      */
-    private String supcode;
+    private String supCode;
     /**
      * 供货商名称
      */
-    private String supname;
+    private String supName;
     /**
      * 供货商描述
      */
-    private String supdesc;
+    private String supDesc;
     /**
      * 供货商联系人
      */
-    private String supcontact;
+    private String supContact;
     /**
      * 联系电话
      */
-    private String supphone;
+    private String supPhone;
     /**
      * 供货商地址
      */
@@ -42,23 +42,23 @@ public class TSupplier implements Serializable {
     /**
      * 传真
      */
-    private String supfax;
+    private String supFax;
     /**
      * 创建人id
      */
-    private Long createduserid;
+    private Long createdUserId;
     /**
      * 创建时间
      */
-    private Date createdtime;
+    private Date createdTime;
     /**
      * 修改时间
      */
-    private Date updatedtime;
+    private Date updatedTime;
     /**
      * 修改人id
      */
-    private Long updateduserid;
+    private Long updatedUserId;
 
 
     public Long getId() {
@@ -69,44 +69,44 @@ public class TSupplier implements Serializable {
         this.id = id;
     }
 
-    public String getSupcode() {
-        return supcode;
+    public String getSupCode() {
+        return supCode;
     }
 
-    public void setSupcode(String supcode) {
-        this.supcode = supcode;
+    public void setSupCode(String supCode) {
+        this.supCode = supCode;
     }
 
-    public String getSupname() {
-        return supname;
+    public String getSupName() {
+        return supName;
     }
 
-    public void setSupname(String supname) {
-        this.supname = supname;
+    public void setSupName(String supName) {
+        this.supName = supName;
     }
 
-    public String getSupdesc() {
-        return supdesc;
+    public String getSupDesc() {
+        return supDesc;
     }
 
-    public void setSupdesc(String supdesc) {
-        this.supdesc = supdesc;
+    public void setSupDesc(String supDesc) {
+        this.supDesc = supDesc;
     }
 
-    public String getSupcontact() {
-        return supcontact;
+    public String getSupContact() {
+        return supContact;
     }
 
-    public void setSupcontact(String supcontact) {
-        this.supcontact = supcontact;
+    public void setSupContact(String supContact) {
+        this.supContact = supContact;
     }
 
-    public String getSupphone() {
-        return supphone;
+    public String getSupPhone() {
+        return supPhone;
     }
 
-    public void setSupphone(String supphone) {
-        this.supphone = supphone;
+    public void setSupPhone(String supPhone) {
+        this.supPhone = supPhone;
     }
 
     public String getSupaddress() {
@@ -117,44 +117,44 @@ public class TSupplier implements Serializable {
         this.supaddress = supaddress;
     }
 
-    public String getSupfax() {
-        return supfax;
+    public String getSupFax() {
+        return supFax;
     }
 
-    public void setSupfax(String supfax) {
-        this.supfax = supfax;
+    public void setSupFax(String supFax) {
+        this.supFax = supFax;
     }
 
-    public Long getCreateduserid() {
-        return createduserid;
+    public Long getCreatedUserId() {
+        return createdUserId;
     }
 
-    public void setCreateduserid(Long createduserid) {
-        this.createduserid = createduserid;
+    public void setCreatedUserId(Long createdUserId) {
+        this.createdUserId = createdUserId;
     }
 
-    public Date getCreatedtime() {
-        return createdtime;
+    public Date getCreatedTime() {
+        return createdTime;
     }
 
-    public void setCreatedtime(Date createdtime) {
-        this.createdtime = createdtime;
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
-    public Date getUpdatedtime() {
-        return updatedtime;
+    public Date getUpdatedTime() {
+        return updatedTime;
     }
 
-    public void setUpdatedtime(Date updatedtime) {
-        this.updatedtime = updatedtime;
+    public void setUpdatedTime(Date updatedTime) {
+        this.updatedTime = updatedTime;
     }
 
-    public Long getUpdateduserid() {
-        return updateduserid;
+    public Long getUpdatedUserId() {
+        return updatedUserId;
     }
 
-    public void setUpdateduserid(Long updateduserid) {
-        this.updateduserid = updateduserid;
+    public void setUpdatedUserId(Long updatedUserId) {
+        this.updatedUserId = updatedUserId;
     }
 
 }

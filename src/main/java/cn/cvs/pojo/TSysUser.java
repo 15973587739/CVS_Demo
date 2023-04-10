@@ -23,7 +23,7 @@ public class TSysUser implements Serializable {
     /**
      * 真是姓名
      */
-    private String realname;
+    private String realName;
     /**
      * 密码
      */
@@ -47,25 +47,14 @@ public class TSysUser implements Serializable {
     /**
      * 用户角色id
      */
-    private Long roleid;
+    private Long roleId;
+    private Long createdUserId;
+    private Date createdTime;
+    private Long updatedUserId;
+    private Date updatedTime;
     /**
-     * 创建人
+     * 角色名称
      */
-    private Long createduserid;
-    /**
-     * 创建时间
-     */
-    private Date createdtime;
-    /**
-     * 修改人
-     */
-    private Long updateduserid;
-    /**
-     * 修改时间
-     */
-    private Date updatedtime;
-
-    private String userRoleName;
     private TSysRole sysRole;
     private List<TAddress> addressList;
 
@@ -74,7 +63,7 @@ public class TSysUser implements Serializable {
         return "SysUser{" +
                 "id=" + id +
                 ", account='" + account + '\'' +
-                ", realName='" + realname + '\'' +
+                ", realName='" + realName + '\'' +
                 ", sex=" + sex +
                 ", phone='" + phone + '\'' +
                 '}';
@@ -97,12 +86,12 @@ public class TSysUser implements Serializable {
         this.account = account;
     }
 
-    public String getRealname() {
-        return realname;
+    public String getRealName() {
+        return realName;
     }
 
-    public void setRealname(String realname) {
-        this.realname = realname;
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     public String getPassword() {
@@ -145,55 +134,12 @@ public class TSysUser implements Serializable {
         this.address = address;
     }
 
-    public Long getRoleid() {
-        return roleid;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public void setRoleid(Long roleid) {
-        this.roleid = roleid;
-    }
-
-    public Long getCreateduserid() {
-        return createduserid;
-    }
-
-    public void setCreateduserid(Long createduserid) {
-        this.createduserid = createduserid;
-    }
-
-    public Date getCreatedtime() {
-        return createdtime;
-    }
-
-    public void setCreatedtime(Date createdtime) {
-        this.createdtime = createdtime;
-    }
-
-    public Long getUpdateduserid() {
-        return updateduserid;
-    }
-
-    public void setUpdateduserid(Long updateduserid) {
-        this.updateduserid = updateduserid;
-    }
-
-    public Date getUpdatedtime() {
-        return updatedtime;
-    }
-
-    public void setUpdatedtime(Date updatedtime) {
-        this.updatedtime = updatedtime;
-    }
-
-    /**
-     * 角色名称
-     */
-    public String getUserRoleName() {
-        return userRoleName;
-    }
-
-    public void setUserRoleName(String userRoleName) {
-        this.userRoleName = userRoleName;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
     /**
@@ -216,6 +162,50 @@ public class TSysUser implements Serializable {
 
     public void setAddressList(List<TAddress> addressList) {
         this.addressList = addressList;
+    }
+
+    /**
+     * 创建人
+     */
+    public Long getCreatedUserId() {
+        return createdUserId;
+    }
+
+    public void setCreatedUserId(Long createdUserId) {
+        this.createdUserId = createdUserId;
+    }
+
+    /**
+     * 创建时间
+     */
+    public Date getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    /**
+     * 修改人
+     */
+    public Long getUpdatedUserId() {
+        return updatedUserId;
+    }
+
+    public void setUpdatedUserId(Long updatedUserId) {
+        this.updatedUserId = updatedUserId;
+    }
+
+    /**
+     * 修改时间
+     */
+    public Date getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(Date updatedTime) {
+        this.updatedTime = updatedTime;
     }
 }
 

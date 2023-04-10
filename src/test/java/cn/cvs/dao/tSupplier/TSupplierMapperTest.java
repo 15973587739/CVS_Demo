@@ -1,6 +1,5 @@
-package cn.cvs.dao.TSupplier;
+package cn.cvs.dao.tSupplier;
 
-import cn.cvs.dao.TSupplier.TSupplierMapper;
 import cn.cvs.pojo.TSupplier;
 import cn.cvs.utils.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;

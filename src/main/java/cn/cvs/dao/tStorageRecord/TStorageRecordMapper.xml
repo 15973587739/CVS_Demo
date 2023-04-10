@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cvs.dao.tStorageRecord.TStorageRecordMapper">
+
+    <resultMap type="cn.cvs.pojo.TStorageRecord" id="TStorageRecordMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="srCode" column="srCode" jdbcType="VARCHAR"/>
+        <result property="goodsName" column="goodsName" jdbcType="VARCHAR"/>
+        <result property="goodsDesc" column="goodsDesc" jdbcType="VARCHAR"/>
+        <result property="goodsUnit" column="goodsUnit" jdbcType="VARCHAR"/>
+        <result property="goodsCount" column="goodsCount" jdbcType="NUMERIC"/>
+        <result property="totalAmount" column="totalAmount" jdbcType="NUMERIC"/>
+        <result property="payStatus" column="payStatus" jdbcType="INTEGER"/>
+        <result property="createdUserId" column="createdUserId" jdbcType="INTEGER"/>
+        <result property="createdTime" column="createdTime" jdbcType="TIMESTAMP"/>
+        <result property="updatedUserId" column="updatedUserId" jdbcType="INTEGER"/>
+        <result property="updatedTime" column="updatedTime" jdbcType="TIMESTAMP"/>
+        <result property="supplierId" column="supplierId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TStorageRecordMap">
+        select
+            id, srCode, goodsName, goodsDesc, goodsUnit, goodsCount, totalAmount, payStatus, createdUserId, createdTime, updatedUserId, updatedTime, supplierId
+        from t_storage_record
+        where id = #{id}
+    </select>
+
+
+    <!--查询入库记录-->
+    <select id="queryRecord" resultType="TStorageRecord">
+        select
+          id, srCode, goodsName, goodsDesc, goodsUnit, goodsCount, totalAmount, payStatus, createdUserId, createdTime, updatedUserId, updatedTime, supplierId
+        from t_storage_record where goodsName like CONCAT ('%',#{goodsName},'%') and supplierId = #{supplierId}  and payStatus = #{payStatus}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TStorageRecordMap">
+        select
+          id, srCode, goodsName, goodsDesc, goodsUnit, goodsCount, totalAmount, payStatus, createdUserId, createdTime, updatedUserId, updatedTime, supplierId
+        from t_storage_record
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="srCode != null and srCode != ''">
+                and srCode = #{srCode}
+            </if>
+            <if test="goodsName != null and goodsName != ''">
+                and goodsName = #{goodsName}
+            </if>
+            <if test="goodsDesc != null and goodsDesc != ''">
+                and goodsDesc = #{goodsDesc}
+            </if>
+            <if test="goodsUnit != null and goodsUnit != ''">
+                and goodsUnit = #{goodsUnit}
+            </if>
+            <if test="goodsCount != null">
+                and goodsCount = #{goodsCount}
+            </if>
+            <if test="totalAmount != null">
+                and totalAmount = #{totalAmount}
+            </if>
+            <if test="payStatus != null">
+                and payStatus = #{payStatus}
+            </if>
+            <if test="createdUserId != null">
+                and createdUserId = #{createdUserId}
+            </if>
+            <if test="createdTime != null">
+                and createdTime = #{createdTime}
+            </if>
+            <if test="updatedUserId != null">
+                and updatedUserId = #{updatedUserId}
+            </if>
+            <if test="updatedTime != null">
+                and updatedTime = #{updatedTime}
+            </if>
+            <if test="supplierId != null">
+                and supplierId = #{supplierId}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from t_storage_record
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="srCode != null and srCode != ''">
+                and srCode = #{srCode}
+            </if>
+            <if test="goodsName != null and goodsName != ''">
+                and goodsName = #{goodsName}
+            </if>
+            <if test="goodsDesc != null and goodsDesc != ''">
+                and goodsDesc = #{goodsDesc}
+            </if>
+            <if test="goodsUnit != null and goodsUnit != ''">
+                and goodsUnit = #{goodsUnit}
+            </if>
+            <if test="goodsCount != null">
+                and goodsCount = #{goodsCount}
+            </if>
+            <if test="totalAmount != null">
+                and totalAmount = #{totalAmount}
+            </if>
+            <if test="payStatus != null">
+                and payStatus = #{payStatus}
+            </if>
+            <if test="createdUserId != null">
+                and createdUserId = #{createdUserId}
+            </if>
+            <if test="createdTime != null">
+                and createdTime = #{createdTime}
+            </if>
+            <if test="updatedUserId != null">
+                and updatedUserId = #{updatedUserId}
+            </if>
+            <if test="updatedTime != null">
+                and updatedTime = #{updatedTime}
+            </if>
+            <if test="supplierId != null">
+                and supplierId = #{supplierId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into t_storage_record(srCode, goodsName, goodsDesc, goodsUnit, goodsCount, totalAmount, payStatus, createdUserId, createdTime, updatedUserId, updatedTime, supplierId)
+        values (#{srCode}, #{goodsName}, #{goodsDesc}, #{goodsUnit}, #{goodsCount}, #{totalAmount}, #{payStatus}, #{createdUserId}, #{createdTime}, #{updatedUserId}, #{updatedTime}, #{supplierId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into t_storage_record(srCode, goodsName, goodsDesc, goodsUnit, goodsCount, totalAmount, payStatus, createdUserId, createdTime, updatedUserId, updatedTime, supplierId)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.srCode}, #{entity.goodsName}, #{entity.goodsDesc}, #{entity.goodsUnit}, #{entity.goodsCount}, #{entity.totalAmount}, #{entity.payStatus}, #{entity.createdUserId}, #{entity.createdTime}, #{entity.updatedUserId}, #{entity.updatedTime}, #{entity.supplierId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into t_storage_record(srCode, goodsName, goodsDesc, goodsUnit, goodsCount, totalAmount, payStatus, createdUserId, createdTime, updatedUserId, updatedTime, supplierId)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.srCode}, #{entity.goodsName}, #{entity.goodsDesc}, #{entity.goodsUnit}, #{entity.goodsCount}, #{entity.totalAmount}, #{entity.payStatus}, #{entity.createdUserId}, #{entity.createdTime}, #{entity.updatedUserId}, #{entity.updatedTime}, #{entity.supplierId})
+        </foreach>
+        on duplicate key update
+        srCode = values(srCode),
+        goodsName = values(goodsName),
+        goodsDesc = values(goodsDesc),
+        goodsUnit = values(goodsUnit),
+        goodsCount = values(goodsCount),
+        totalAmount = values(totalAmount),
+        payStatus = values(payStatus),
+        createdUserId = values(createdUserId),
+        createdTime = values(createdTime),
+        updatedUserId = values(updatedUserId),
+        updatedTime = values(updatedTime),
+        supplierId = values(supplierId)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update t_storage_record
+        <set>
+            <if test="srCode != null and srCode != ''">
+                srCode = #{srCode},
+            </if>
+            <if test="goodsName != null and goodsName != ''">
+                goodsName = #{goodsName},
+            </if>
+            <if test="goodsDesc != null and goodsDesc != ''">
+                goodsDesc = #{goodsDesc},
+            </if>
+            <if test="goodsUnit != null and goodsUnit != ''">
+                goodsUnit = #{goodsUnit},
+            </if>
+            <if test="goodsCount != null">
+                goodsCount = #{goodsCount},
+            </if>
+            <if test="totalAmount != null">
+                totalAmount = #{totalAmount},
+            </if>
+            <if test="payStatus != null">
+                payStatus = #{payStatus},
+            </if>
+            <if test="createdUserId != null">
+                createdUserId = #{createdUserId},
+            </if>
+            <if test="createdTime != null">
+                createdTime = #{createdTime},
+            </if>
+            <if test="updatedUserId != null">
+                updatedUserId = #{updatedUserId},
+            </if>
+            <if test="updatedTime != null">
+                updatedTime = #{updatedTime},
+            </if>
+            <if test="supplierId != null">
+                supplierId = #{supplierId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from t_storage_record where id = #{id}
+    </delete>
+
+</mapper>
+

@@ -1,4 +1,4 @@
-package cn.cvs.dao.TStorageRecord;
+package cn.cvs.dao.tStorageRecord;
 
 import cn.cvs.pojo.TStorageRecord;
 import cn.cvs.utils.MyBatisUtil;
@@ -17,9 +17,11 @@ public class TStorageRecordMapperTest {
         SqlSession sqlSession=null;
         List<TStorageRecord> recordList = null;
         try {
+            sqlSession = MyBatisUtil.createSqlSession();
             TStorageRecord record = new TStorageRecord();
-            record.setSupplierid(1L);
-            record.setGoodsname("日用品");
+            record.setSupplierId(3L);
+            record.setGoodsName("米");
+            record.setPayStatus(2);
             recordList=sqlSession.getMapper(TStorageRecordMapper.class).queryRecord(record);
             recordList.forEach(u->System.out.println(u));
         }catch (Exception e){

@@ -22,23 +22,23 @@ public class TSysRole implements Serializable {
     /**
      * 角色名称
      */
-    private String rolename;
+    private String roleName;
     /**
      * 创建者
      */
-    private Long createduserid;
+    private Long createdUserId;
     /**
      * 创建时间
      */
-    private Date createdtime;
+    private Date createdTime;
     /**
      * 修改者
      */
-    private Long updateduserid;
+    private Long updatedUserId;
     /**
      * 修改时间
      */
-    private Date updatedtime;
+    private Date updatedTime;
 
 
     public Long getId() {
@@ -57,44 +57,44 @@ public class TSysRole implements Serializable {
         this.code = code;
     }
 
-    public String getRolename() {
-        return rolename;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
-    public Long getCreateduserid() {
-        return createduserid;
+    public Long getCreatedUserId() {
+        return createdUserId;
     }
 
-    public void setCreateduserid(Long createduserid) {
-        this.createduserid = createduserid;
+    public void setCreatedUserId(Long createdUserId) {
+        this.createdUserId = createdUserId;
     }
 
-    public Date getCreatedtime() {
-        return createdtime;
+    public Date getCreatedTime() {
+        return createdTime;
     }
 
-    public void setCreatedtime(Date createdtime) {
-        this.createdtime = createdtime;
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
-    public Long getUpdateduserid() {
-        return updateduserid;
+    public Long getUpdatedUserId() {
+        return updatedUserId;
     }
 
-    public void setUpdateduserid(Long updateduserid) {
-        this.updateduserid = updateduserid;
+    public void setUpdatedUserId(Long updatedUserId) {
+        this.updatedUserId = updatedUserId;
     }
 
-    public Date getUpdatedtime() {
-        return updatedtime;
+    public Date getUpdatedTime() {
+        return updatedTime;
     }
 
-    public void setUpdatedtime(Date updatedtime) {
-        this.updatedtime = updatedtime;
+    public void setUpdatedTime(Date updatedTime) {
+        this.updatedTime = updatedTime;
     }
 
 }
