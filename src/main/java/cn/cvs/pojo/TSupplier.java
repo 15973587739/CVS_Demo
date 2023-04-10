@@ -39,7 +39,7 @@ public class TSupplier implements Serializable {
     /**
      * 供货商地址
      */
-    private String supaddress;
+    private String supAddress;
     /**
      * 传真
      */
@@ -60,6 +60,17 @@ public class TSupplier implements Serializable {
      * 修改人id
      */
     private Long updatedUserId;
+
+    @Override
+    public String toString() {
+        return "TSupplier{" +
+                "supCode='" + supCode + '\'' +
+                ", supName='" + supName + '\'' +
+                ", supContact='" + supContact + '\'' +
+                ", supPhone='" + supPhone + '\'' +
+                ", recordList=" + recordList +
+                '}';
+    }
 
     /**
      * 入库集合
@@ -115,12 +126,12 @@ public class TSupplier implements Serializable {
         this.supPhone = supPhone;
     }
 
-    public String getSupaddress() {
-        return supaddress;
+    public String getSupAddress() {
+        return supAddress;
     }
 
-    public void setSupaddress(String supaddress) {
-        this.supaddress = supaddress;
+    public void setSupAddress(String supAddress) {
+        this.supAddress = supAddress;
     }
 
     public String getSupFax() {

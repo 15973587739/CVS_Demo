@@ -5,7 +5,7 @@
 <mapper namespace="cn.cvs.dao.tSupplier.TSupplierMapper">
 
     <resultMap type="cn.cvs.pojo.TSupplier" id="TSupplierMap">
-        <result property="id" column="id" jdbcType="INTEGER"/>
+        <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="supCode" column="supCode" jdbcType="VARCHAR"/>
         <result property="supName" column="supName" jdbcType="VARCHAR"/>
         <result property="supDesc" column="supDesc" jdbcType="VARCHAR"/>
@@ -27,6 +27,26 @@
     </select>
     <select id="getSupplierByPojo" resultType="TSupplier" parameterType="TSupplier">
         select * from t_supplier where supName like CONCAT('%', #{supName},'%') and id = ${id}
+    </select>
+
+
+    <resultMap id="TSupplierMaps" type="TSupplier">
+        <id property="id" column="id"/>
+        <result property="supName" column="supName"/>
+        <!--    对象集合    -->
+        <collection property="recordList" ofType="TStorageRecord">
+            <id property="id" column="pid"/>
+<!--            <result property="supCode" column="supCode"/>-->
+<!--            <result property="supName" column="supName"/>-->
+<!--            <result property="supContact" column="supContact"/>-->
+<!--            <result property="supPhone" column="supPhone"/>-->
+        </collection>
+    </resultMap>
+    <select id="getSupplierReBySuId" parameterType="TSupplier" resultMap="TSupplierMaps">
+        SELECT s.*,p.id as pid,p.supCode,p.supName,p.supContact,p.supPhone
+        FROM t_storage_record as s , t_supplier as p
+        where  s.supplierId = p.id
+          and supplierId = #{supplierId}
     </select>
 
 

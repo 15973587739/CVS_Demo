@@ -10,7 +10,7 @@
         <!--使用log4j作为mybatis框架的日志实现-->
         <setting name="logImpl" value="LOG4J"/>
         <!--        自动映射-->
-<!--        <setting name="autoMappingBehavior" value="FULL"/>-->
+        <setting name="autoMappingBehavior" value="FULL"/>
     </settings>
     <typeAliases>
         <package name="cn.cvs.pojo"/>

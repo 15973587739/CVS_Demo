@@ -16,7 +16,7 @@ import java.util.Map;
 
 
 public class TSysUserMapperTest {
-    Logger logger =Logger.getLogger(TSupplierMapperTest.class);
+    Logger logger =Logger.getLogger(TSysUserMapperTest.class);
 
 
     /**

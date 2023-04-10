@@ -94,6 +94,7 @@ public class TStorageRecordMapperTest {
 
     @Test
     public void insert() {
+
     }
 
     @Test
