@@ -18,6 +18,11 @@ public interface TSysUserMapper {
     public List<TSysUser> getUserList();
 
     /**
+     * 通个Id查询数量
+     */
+    public int countUserById(Long id);
+
+    /**
      * 根据用户真实姓名模糊匹配查询用户
      * @param realName 用户真实姓名
      * @return

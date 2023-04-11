@@ -13,6 +13,14 @@
     </resultMap>
 
     <!--查询单个-->
+    <select id="queryByName" resultMap="TSysRoleMap">
+        select
+            id, code, roleName, createdUserId, createdTime, updatedUserId, updatedTime
+        from t_sys_role
+         where roleName like CONCAT('%',#{roleName},'%')
+    </select>
+
+    <!--查询单个-->
     <select id="queryById" resultMap="TSysRoleMap">
         select
           id, code, roleName, createdUserId, createdTime, updatedUserId, updatedTime

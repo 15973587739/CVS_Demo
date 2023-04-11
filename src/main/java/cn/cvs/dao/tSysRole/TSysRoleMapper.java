@@ -23,6 +23,14 @@ public interface TSysRoleMapper {
     TSysRole queryById(Long id);
 
     /**
+     * 通过名称查询多条数据
+     *
+     * @param roleName 名称
+     * @return 实例对象
+     */
+    List<TSysRole> queryByName(String roleName);
+
+    /**
      * 查询指定行数据
      *
      * @param tSysRole 查询条件

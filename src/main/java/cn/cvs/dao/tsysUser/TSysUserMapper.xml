@@ -24,6 +24,10 @@
         select count(*) from t_sys_user
     </select>
 
+    <select id="countUserById" resultType="int">
+        select count(*) from t_sys_role r,t_sys_user u where u.roleId = r.id and r.id = #{id}
+    </select>
+
     <select id="getUserList" resultType="TSysUser">
         select * from t_sys_user
     </select>

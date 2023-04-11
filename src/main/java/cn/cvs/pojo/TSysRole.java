@@ -35,6 +35,20 @@ public class TSysRole implements Serializable {
      * 修改者
      */
     private Long updatedUserId;
+
+    @Override
+    public String toString() {
+        return "TSysRole{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", roleName='" + roleName + '\'' +
+                ", createdUserId=" + createdUserId +
+                ", createdTime=" + createdTime +
+                ", updatedUserId=" + updatedUserId +
+                ", updatedTime=" + updatedTime +
+                '}';
+    }
+
     /**
      * 修改时间
      */
