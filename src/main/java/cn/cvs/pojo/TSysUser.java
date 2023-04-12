@@ -233,7 +233,6 @@ public class TSysUser implements Serializable {
 
     public void setUserRoleName(String userRoleName) {
         this.userRoleName = userRoleName;
-//        this.sysRole.setRoleName(userRoleName);
     }
 }
 

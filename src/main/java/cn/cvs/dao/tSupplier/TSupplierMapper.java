@@ -1,6 +1,7 @@
 package cn.cvs.dao.tSupplier;
 
 import cn.cvs.pojo.TSupplier;
+import cn.cvs.utils.Pager;
 import org.apache.ibatis.annotations.Param;
 
 import java.awt.print.Pageable;
@@ -51,10 +52,10 @@ public interface TSupplierMapper {
      * 查询指定行数据
      *
      * @param tSupplier 查询条件
-     * @param pageable         分页对象
+     * @param pager         分页对象
      * @return 对象列表
      */
-    List<TSupplier> queryAllByLimit(TSupplier tSupplier, @Param("pageable") Pageable pageable);
+    List<TSupplier> queryAllByLimit(TSupplier tSupplier, @Param("pager") Pager pager);
 
 
 

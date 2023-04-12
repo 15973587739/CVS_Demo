@@ -4,6 +4,7 @@ import cn.cvs.dao.tSupplier.TSupplierMapperTest;
 import cn.cvs.pojo.TAddress;
 import cn.cvs.pojo.TSysUser;
 import cn.cvs.utils.MyBatisUtil;
+import cn.cvs.utils.Pager;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -138,6 +139,47 @@ public class TSysUserMapperTest {
             e.printStackTrace();
         }finally {
             MyBatisUtil.closeSqlSession(sqlSession);
+        }
+    }
+
+    @Test
+    public void testGetUsersByChoose(){
+        SqlSession sqlSession=null;
+        List<TSysUser> userList=null;
+        try {
+            sqlSession=MyBatisUtil.createSqlSession();
+            TSysUser sysUser=new TSysUser();
+            sysUser.setRealName("");
+            Date birthday=new SimpleDateFormat("yyyy-MM-dd").parse("2003-10-23");
+            sysUser.setBirthday(birthday);
+            Pager pager=new Pager();
+            pager.setPageNo(0);
+            pager.setPageSize(6);
+            userList=sqlSession.getMapper(TSysUserMapper.class).queryAllByLimit(sysUser,pager);
+            userList.forEach(user -> System.out.println(user));
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            MyBatisUtil.closeSqlSession(sqlSession);
+        }
+    }
+
+    @Test
+    public void getUserByRoleIdArray(){
+        SqlSession sqlSession=null;
+        List<TSysUser> userList=null;
+        Integer[] roleIdArray = {1,2};
+        try {
+            sqlSession=MyBatisUtil.createSqlSession();
+            userList=sqlSession.getMapper(TSysUserMapper.class).getUserByRoleIdArray(roleIdArray);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            MyBatisUtil.closeSqlSession(sqlSession);
+        }
+        logger.info("test count:"+userList.size());
+        for (TSysUser user:userList){
+            logger.info("查询到的用户信息是 :"+user);
         }
     }
 

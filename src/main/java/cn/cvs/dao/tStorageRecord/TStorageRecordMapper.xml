@@ -117,7 +117,7 @@
                 and supplierId = #{supplierId}
             </if>
         </where>
-        limit #{pageable.offset}, #{pageable.pageSize}
+        limit #{pager.pageNo}, #{pager.pageSize}
     </select>
 
     <!--统计总行数-->

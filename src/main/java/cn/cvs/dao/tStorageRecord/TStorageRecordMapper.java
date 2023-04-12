@@ -1,6 +1,7 @@
 package cn.cvs.dao.tStorageRecord;
 
 import cn.cvs.pojo.TStorageRecord;
+import cn.cvs.utils.Pager;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -44,10 +45,10 @@ public interface TStorageRecordMapper {
      * 查询指定行数据
      *
      * @param tStorageRecord 查询条件
-     * @param pageable         分页对象
+     * @param pager         分页对象
      * @return 对象列表
      */
-    List<TStorageRecord> queryAllByLimit(TStorageRecord tStorageRecord, @Param("pageable") Package pageable);
+    List<TStorageRecord> queryAllByLimit(TStorageRecord tStorageRecord, @Param("pager") Pager pager);
 
     /**
      * 统计总行数

@@ -101,7 +101,7 @@
                 and updatedUserId = #{updatedUserId}
             </if>
         </where>
-        limit #{pageable.offset}, #{pageable.pageSize}
+        limit #{pager.pageNo}, #{pager.pageSize}
     </select>
 
     <!--统计总行数-->

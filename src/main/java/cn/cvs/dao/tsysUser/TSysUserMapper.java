@@ -1,6 +1,7 @@
 package cn.cvs.dao.tsysUser;
 
 import cn.cvs.pojo.TSysUser;
+import cn.cvs.utils.Pager;
 import org.apache.ibatis.annotations.Param;
 
 import java.awt.print.Pageable;
@@ -104,7 +105,12 @@ public interface TSysUserMapper {
      */
     public int deleteUserById(@Param("id") Integer id);
 
-
+    /**
+     * 根据角色Id数组查询用户列表
+     * @param roleIds
+     * @return
+     */
+    public List<TSysUser> getUserByRoleIdArray(Integer[] roleIds);
 
 
 
@@ -120,10 +126,10 @@ public interface TSysUserMapper {
      * 查询指定行数据
      *
      * @param tSysUser 查询条件
-     * @param pageable         分页对象
+     * @param pager         分页对象
      * @return 对象列表
      */
-    List<TSysUser> queryAllByLimit(TSysUser tSysUser, @Param("pageable") Pageable pageable);
+    List<TSysUser> queryAllByLimit(TSysUser tSysUser,  @Param("pager") Pager pager);
 
     /**
      * 统计总行数

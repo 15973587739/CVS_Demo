@@ -1,6 +1,7 @@
 package cn.cvs.dao.tSysRole;
 
 import cn.cvs.pojo.TSysRole;
+import cn.cvs.utils.Pager;
 import org.apache.ibatis.annotations.Param;
 
 import java.awt.print.Pageable;
@@ -34,10 +35,10 @@ public interface TSysRoleMapper {
      * 查询指定行数据
      *
      * @param tSysRole 查询条件
-     * @param pageable         分页对象
+     * @param pager         分页对象
      * @return 对象列表
      */
-    List<TSysRole> queryAllByLimit(TSysRole tSysRole, @Param("pageable") Pageable pageable);
+    List<TSysRole> queryAllByLimit(TSysRole tSysRole,  @Param("pager") Pager pager);
 
     /**
      * 统计总行数

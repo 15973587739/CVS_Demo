@@ -112,6 +112,13 @@
         delete  from t_sys_user where id=#{id}
     </delete>
 
+    <select id="getUserByRoleIdArray" resultType="TSysUser">
+        select * from t_sys_user where roleId in
+                                 <foreach collection="array" item="item" open="(" separator="," close=")">
+                                     #{item}
+                                 </foreach>
+    </select>
+
 
         <!---->
         <!---->
@@ -169,7 +176,7 @@
                 and updatedTime = #{updatedTime}
             </if>
         </where>
-        limit #{pageable.offset}, #{pageable.pageSize}
+        limit #{pager.pageNo}, #{pager.pageSize}
     </select>
 
     <!--统计总行数-->
