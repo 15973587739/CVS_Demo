@@ -52,10 +52,10 @@ public interface TSupplierMapper {
      * 查询指定行数据
      *
      * @param tSupplier 查询条件
-     * @param pager         分页对象
+     * @param pageBegin         分页对象
      * @return 对象列表
      */
-    List<TSupplier> queryAllByLimit(TSupplier tSupplier, @Param("pager") Pager pager);
+    List<TSupplier> queryAllByLimit(TSupplier tSupplier, @Param("pageBegin") Integer pageBegin  ,  @Param("pageSize") Integer pageSize);
 
 
 

@@ -101,7 +101,7 @@
                 and updatedUserId = #{updatedUserId}
             </if>
         </where>
-        limit #{pager.pageNo}, #{pager.pageSize}
+        limit #{pageBegin} ,  #{pageSize}
     </select>
 
     <!--统计总行数-->
@@ -185,7 +185,7 @@
     <!--通过主键修改数据-->
     <update id="update">
         update t_supplier
-        <set>
+        <trim prefix="set" suffixOverrides="," suffix="where id = #{id}">
             <if test="supCode != null and supCode != ''">
                 supCode = #{supCode},
             </if>
@@ -219,7 +219,7 @@
             <if test="updatedUserId != null">
                 updatedUserId = #{updatedUserId},
             </if>
-        </set>
+        </trim>
         where id = #{id}
     </update>
 

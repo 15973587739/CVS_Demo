@@ -6,7 +6,7 @@ import cn.cvs.pojo.TSysUser;
 import cn.cvs.utils.MyBatisUtil;
 import cn.cvs.utils.Pager;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.log4j.Logger;
+import org.jboss.logging.Logger;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
@@ -17,25 +17,25 @@ import java.util.Map;
 
 
 public class TSysUserMapperTest {
-    Logger logger =Logger.getLogger(TSysUserMapperTest.class);
+    Logger logger = Logger.getLogger(TSysUserMapperTest.class);
 
 
     /**
      * 统计用户数量的方法
      */
-    @Test
-    public void count(){
-        SqlSession sqlSession=null;
-        try {
-            sqlSession= MyBatisUtil.createSqlSession();
-            int count = sqlSession.getMapper(TSysUserMapper.class).count();
-            System.out.println("数量" + count);
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            MyBatisUtil.closeSqlSession(sqlSession);
-        }
-    }
+//    @Test
+//    public void count(){
+//        SqlSession sqlSession=null;
+//        try {
+//            sqlSession= MyBatisUtil.createSqlSession();
+//            int count = sqlSession.getMapper(TSysUserMapper.class).count();
+//            System.out.println("数量" + count);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }finally {
+//            MyBatisUtil.closeSqlSession(sqlSession);
+//        }
+//    }
 
     /**
      * 查询用户列表
@@ -150,12 +150,11 @@ public class TSysUserMapperTest {
             sqlSession=MyBatisUtil.createSqlSession();
             TSysUser sysUser=new TSysUser();
             sysUser.setRealName("");
-            Date birthday=new SimpleDateFormat("yyyy-MM-dd").parse("2003-10-23");
-            sysUser.setBirthday(birthday);
+            sysUser.setRoleId(2L);
             Pager pager=new Pager();
-            pager.setPageNo(0);
-            pager.setPageSize(6);
-            userList=sqlSession.getMapper(TSysUserMapper.class).queryAllByLimit(sysUser,pager);
+            pager.setPageNo(2);
+            pager.setPageSize(2);
+            userList=sqlSession.getMapper(TSysUserMapper.class).queryAllByLimit(sysUser,(pager.getPageNo()-1) * pager.getPageSize(),pager.getPageSize());
             userList.forEach(user -> System.out.println(user));
         }catch (Exception e){
             e.printStackTrace();
@@ -164,6 +163,26 @@ public class TSysUserMapperTest {
         }
     }
 
+    @Test
+    public void selectPageList(){
+        SqlSession sqlSession=null;
+        List<TSysUser> userList=null;
+        try {
+            sqlSession=MyBatisUtil.createSqlSession();
+            TSysUser sysUser=new TSysUser();
+            sysUser.setRealName("");
+            sysUser.setRoleId(2L);
+            Pager pager=new Pager();
+            pager.setPageNo(2);
+            pager.setPageSize(2);
+            userList=sqlSession.getMapper(TSysUserMapper.class).selectPageList(sysUser.getRealName(),2,(pager.getPageNo()-1) * pager.getPageSize(),pager.getPageSize());
+            userList.forEach(user -> System.out.println(user));
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            MyBatisUtil.closeSqlSession(sqlSession);
+        }
+    }
     @Test
     public void getUserByRoleIdArray(){
         SqlSession sqlSession=null;
@@ -262,7 +281,7 @@ public class TSysUserMapperTest {
             user.setRoleId(1L);
             user.setUpdatedUserId(4L);
             user.setUpdatedTime(new Date());
-            count=sqlSession.getMapper(TSysUserMapper.class).add(user);
+            count=sqlSession.getMapper(TSysUserMapper.class).insert(user);
             sqlSession.commit();
         }catch (Exception e){
             sqlSession.rollback();
@@ -291,7 +310,7 @@ public class TSysUserMapperTest {
             user.setUpdatedUserId(4L);
             user.setUpdatedTime(new Date());
             user.setId(19L);
-            count=sqlSession.getMapper(TSysUserMapper.class).modify(user);
+            count=sqlSession.getMapper(TSysUserMapper.class).update(user);
             sqlSession.commit();
         }catch (Exception e){
             sqlSession.rollback();

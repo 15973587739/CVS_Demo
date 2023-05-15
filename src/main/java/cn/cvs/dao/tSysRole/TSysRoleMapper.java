@@ -35,10 +35,10 @@ public interface TSysRoleMapper {
      * 查询指定行数据
      *
      * @param tSysRole 查询条件
-     * @param pager         分页对象
+     * @param pageBegin         分页对象
      * @return 对象列表
      */
-    List<TSysRole> queryAllByLimit(TSysRole tSysRole,  @Param("pager") Pager pager);
+    List<TSysRole> queryAllByLimit(TSysRole tSysRole,  @Param("pageBegin") Integer pageBegin  ,  @Param("pageSize") Integer pageSize);
 
     /**
      * 统计总行数

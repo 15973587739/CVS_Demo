@@ -20,7 +20,7 @@
         <result property="updatedTime" column="updatedTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <select id="count" resultType="int">
+    <select id="count1" resultType="int">
         select count(*) from t_sys_user
     </select>
 
@@ -92,26 +92,6 @@
         select u.*,a.id as aid,a.contact,a.addressDesc,a.postCode,a.tel from t_sys_user u,t_address a where u.id = a.userId and u.id=#{userId};
     </select>
 
-
-    <insert id="add" parameterType="TSysUser">
-        insert into t_sys_user(account, realName, password, sex, birthday, phone, address, roleId, createdUserId, createdTime)
-        values(#{account},#{realName},#{password}, #{sex},#{birthday},#{phone},#{address},#{roleId},#{createdUserId},#{createdTime})
-    </insert>
-
-    <update id="modify" parameterType="TSysUser">
-        update t_sys_user set account=#{account},realName=#{realName},password=#{password},sex=#{sex},phone=#{phone},address=#{address},
-        birthday=#{birthday},roleId=#{roleId},updatedUserId=#{updatedUserId},updatedTime=#{updatedTime}
-        where id=#{id}
-    </update>
-
-    <update id="updatePwd">
-        update t_sys_user set password=#{password} where id=#{id}
-    </update>
-
-    <delete id="deleteUserById" parameterType="integer">
-        delete  from t_sys_user where id=#{id}
-    </delete>
-
     <select id="getUserByRoleIdArray" resultType="TSysUser">
         select * from t_sys_user where roleId in
                                  <foreach collection="array" item="item" open="(" separator="," close=")">
@@ -128,6 +108,20 @@
             id, account, realName, password, sex, birthday, phone, address, roleId, createdUserId, createdTime, updatedUserId, updatedTime
         from t_sys_user
         where id = #{id}
+    </select>
+
+    <select id="selectPageList" resultType="TSysUser">
+        select * from t_sys_user
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="reName != null and reName != ''">
+                and realName like CONCAT ('%',#{realName},'%')
+            </if>
+            <if test="roId != null">
+                and id = #{roId}
+            </if>
+        </trim>
+        order by createdTime desc
+        limit #{pageBegin} ,  #{pageSize}
     </select>
 
     <!--查询指定行数据-->
@@ -176,7 +170,7 @@
                 and updatedTime = #{updatedTime}
             </if>
         </where>
-        limit #{pager.pageNo}, #{pager.pageSize}
+        limit #{pageBegin} , #{pageSize}
     </select>
 
     <!--统计总行数-->
@@ -304,9 +298,25 @@
         </set>
         where id = #{id}
     </update>
+    <update id="updatePwd">
+        update t_sys_user set password=#{password} where id=#{id}
+    </update>
+
 
     <!--通过主键删除-->
     <delete id="deleteById">
         delete from t_sys_user where id = #{id}
     </delete>
+    <delete id="deleteUserById" parameterType="integer">
+        delete  from t_sys_user where id=#{id}
+    </delete>
+
+
+    <resultMap id="TSysUserResult" type="TSysUser">
+        <result property="realName" column="roleName"/>
+    </resultMap>
+    <select id="selectSysUserList" parameterType="TSysUser" resultMap="TSysUserResult">
+        select u.* ,r.roleName from t_sys_user u ,t_sys_role r where u.roleId = r.id and u.roleId = r.id and u.roleId = #{roleId}
+        and u.realName like CONCAT('%',#{realName},'%')
+    </select>
 </mapper>

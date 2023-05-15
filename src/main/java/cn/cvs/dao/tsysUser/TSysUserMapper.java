@@ -8,11 +8,16 @@ import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Siyu
+ */
 public interface TSysUserMapper {
+    public List<TSysUser> selectSysUserList();
+
     /**
      * 统计用户数量的方法
      */
-    public int count();
+    public int count1();
     /**
      * 查询用户列表
      */
@@ -77,20 +82,6 @@ public interface TSysUserMapper {
     public List<TSysUser>getUserAddressesByUserId(@Param("userId") Integer userId);
 
     /**
-     * 添加用户
-     * @param user
-     * @return
-     */
-    public int add(TSysUser user);
-
-    /**
-     * 修改用户
-     * @param user
-     * @return
-     */
-    public int modify(TSysUser user);
-
-    /**
      * 修改个人密码
      * @param id
      * @param pwd
@@ -121,15 +112,24 @@ public interface TSysUserMapper {
      * @return 实例对象
      */
     TSysUser queryById(Long id);
+    /**
+     * 分页查询指定行数据
+     *
+     * @param realName 查询条件
+     * @param realId 查询条件
+     * @param pageBegin         分页对象
+     * @return 对象列表
+     */
+    List<TSysUser> selectPageList(@Param("reName")String realName, @Param("roId")int realId,  @Param("pageBegin") Integer pageBegin  ,  @Param("pageSize") Integer pageSize);
 
     /**
      * 查询指定行数据
      *
      * @param tSysUser 查询条件
-     * @param pager         分页对象
+     * @param pageBegin         分页对象
      * @return 对象列表
      */
-    List<TSysUser> queryAllByLimit(TSysUser tSysUser,  @Param("pager") Pager pager);
+    List<TSysUser> queryAllByLimit(TSysUser tSysUser,  @Param("pageBegin") Integer pageBegin  ,  @Param("pageSize") Integer pageSize);
 
     /**
      * 统计总行数

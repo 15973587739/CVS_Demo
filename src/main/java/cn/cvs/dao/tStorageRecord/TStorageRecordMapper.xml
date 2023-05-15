@@ -70,6 +70,19 @@
           and payStatus = #{payStatus}
     </select>
 
+    <select id="getStorageRecordArray" resultType="TStorageRecord">
+        select * from t_storage_record where supplierId in
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectPageList" resultType="TSysUser">
+        select * from t_storage_record
+        order by createdTime desc
+        limit #{pageBegin} ,  #{pageSize}
+    </select>
+
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="TStorageRecordMap">
@@ -117,7 +130,7 @@
                 and supplierId = #{supplierId}
             </if>
         </where>
-        limit #{pager.pageNo}, #{pager.pageSize}
+        limit #{pageBegin} ,  #{pageSize}
     </select>
 
     <!--统计总行数-->

@@ -1,12 +1,15 @@
 package cn.cvs.dao.tSysRole;
 
+import cn.cvs.dao.tStorageRecord.TStorageRecordMapper;
 import cn.cvs.dao.tSupplier.TSupplierMapper;
 import cn.cvs.dao.tSupplier.TSupplierMapperTest;
 import cn.cvs.dao.tsysUser.TSysUserMapper;
+import cn.cvs.pojo.TStorageRecord;
 import cn.cvs.pojo.TSupplier;
 import cn.cvs.pojo.TSysRole;
 import cn.cvs.pojo.TSysUser;
 import cn.cvs.utils.MyBatisUtil;
+import cn.cvs.utils.Pager;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -42,6 +45,21 @@ public class TSysRoleMapperTest {
 
     @Test
     public void queryAllByLimit() {
+        SqlSession sqlSession=null;
+        List<TSysRole> recordList=null;
+        try {
+            sqlSession=MyBatisUtil.createSqlSession();
+            TSysRole role = new TSysRole();
+            Pager pager=new Pager();
+            pager.setPageNo(2);
+            pager.setPageSize(2);
+            recordList=sqlSession.getMapper(TSysRoleMapper.class).queryAllByLimit(role,(pager.getPageNo()-1) * pager.getPageSize(),pager.getPageSize());
+            recordList.forEach(s -> System.out.println(s));
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            MyBatisUtil.closeSqlSession(sqlSession);
+        }
     }
 
     @Test

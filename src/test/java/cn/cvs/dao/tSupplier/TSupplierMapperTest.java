@@ -52,6 +52,8 @@ public class TSupplierMapperTest {
         }
     }
 
+
+
     /**
      * 查询入库记录 练习4
      */
