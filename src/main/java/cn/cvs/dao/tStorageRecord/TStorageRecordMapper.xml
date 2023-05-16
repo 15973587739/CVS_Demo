@@ -28,7 +28,7 @@
 
 
     <!--查询入库记录-->
-    <select id="queryRecord" resultType="TStorageRecord">
+    <select id="queryRecord" resultType="cn.cvs.pojo.TStorageRecord">
         select
           id, srCode, goodsName, goodsDesc, goodsUnit, goodsCount, totalAmount, payStatus, createdUserId, createdTime, updatedUserId, updatedTime, supplierId
         from t_storage_record
@@ -70,14 +70,14 @@
           and payStatus = #{payStatus}
     </select>
 
-    <select id="getStorageRecordArray" resultType="TStorageRecord">
+    <select id="getStorageRecordArray" resultType="cn.cvs.pojo.TStorageRecord">
         select * from t_storage_record where supplierId in
         <foreach collection="array" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>
     </select>
 
-    <select id="selectPageList" resultType="TSysUser">
+    <select id="selectPageList" resultType="cn.cvs.pojo.TStorageRecord">
         select * from t_storage_record
         order by createdTime desc
         limit #{pageBegin} ,  #{pageSize}
@@ -179,6 +179,7 @@
             </if>
         </where>
     </select>
+    <select id="getStorageRecordMap" resultType="cn.cvs.pojo.TStorageRecord"></select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

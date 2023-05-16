@@ -13,10 +13,8 @@
     </resultMap>
 
     <!--查询单个-->
-    <select id="queryByName" resultMap="TSysRoleMap">
-        select
-            id, code, roleName, createdUserId, createdTime, updatedUserId, updatedTime
-        from t_sys_role
+    <select id="queryByName" resultType="TSysRole" parameterType="string">
+        select * from t_sys_role
         <where>
             <if test="roleName != null and roleName != ''">
                 and roleName like CONCAT('%',#{roleName},'%')

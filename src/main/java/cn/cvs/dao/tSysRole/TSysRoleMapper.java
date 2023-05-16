@@ -29,7 +29,7 @@ public interface TSysRoleMapper {
      * @param roleName 名称
      * @return 实例对象
      */
-    List<TSysRole> queryByName(String roleName);
+    List<TSysRole> queryByName(@Param("roleName") String roleName);
 
     /**
      * 查询指定行数据

@@ -28,23 +28,23 @@
         select count(*) from t_sys_role r,t_sys_user u where u.roleId = r.id and r.id = #{id}
     </select>
 
-    <select id="getUserList" resultType="TSysUser">
+    <select id="getUserList" resultType="cn.cvs.pojo.TSysUser">
         select * from t_sys_user
     </select>
 
-    <select id="getUsersByRealName" resultType="TSysUser" parameterType="String">
+    <select id="getUsersByRealName" resultType="cn.cvs.pojo.TSysUser" parameterType="String">
         select * from t_sys_user where realName like CONCAT ('%',#{param},'%')
     </select>
 
-    <select id="getUsersByPojo" resultType="TSysUser" parameterType="TSysUser">
+    <select id="getUsersByPojo" resultType="cn.cvs.pojo.TSysUser" parameterType="TSysUser">
         select * from t_sys_user where realName like CONCAT ('%',#{realName},'%') and roleId=#{roleId}
     </select>
 
-    <select id="getUsersByMap" resultType="TSysUser" parameterType="map">
+    <select id="getUsersByMap" resultType="cn.cvs.pojo.TSysUser" parameterType="map">
         select * from t_sys_user where realName like CONCAT ('%',#{rName},'%') and roleId=#{rId}
     </select>
 
-    <select id="getUsersByParams" resultType="TSysUser" parameterType="TSysUser">
+    <select id="getUsersByParams" resultType="cn.cvs.pojo.TSysUser" parameterType="TSysUser">
          select * from t_sys_user where realName like CONCAT ('%',#{reName},'%') and roleId=#{roId}
     </select>
 
@@ -92,7 +92,7 @@
         select u.*,a.id as aid,a.contact,a.addressDesc,a.postCode,a.tel from t_sys_user u,t_address a where u.id = a.userId and u.id=#{userId};
     </select>
 
-    <select id="getUserByRoleIdArray" resultType="TSysUser">
+    <select id="getUserByRoleIdArray" resultType="cn.cvs.pojo.TSysUser">
         select * from t_sys_user where roleId in
                                  <foreach collection="array" item="item" open="(" separator="," close=")">
                                      #{item}
@@ -110,7 +110,7 @@
         where id = #{id}
     </select>
 
-    <select id="selectPageList" resultType="TSysUser">
+    <select id="selectPageList" resultType="cn.cvs.pojo.TSysUser">
         select * from t_sys_user
         <trim prefix="where" prefixOverrides="and | or">
             <if test="reName != null and reName != ''">
@@ -174,7 +174,7 @@
     </select>
 
     <!--统计总行数-->
-    <select id="countS" resultType="java.lang.Long">
+    <select id="count" resultType="java.lang.Long">
         select count(1)
         from t_sys_user
         <where>
