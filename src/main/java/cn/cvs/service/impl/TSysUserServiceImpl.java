@@ -19,8 +19,9 @@ import java.util.List;
 public class TSysUserServiceImpl implements TSysUserService {
     @Autowired
     private TSysUserMapper sysUserMapper;
+
     @Override
-    public List<TSysUser> getList(TSysUser sysUser) {
+    public List<TSysUser> getUserList() {
         try {
             return sysUserMapper.getUserList();
         }catch (RuntimeException e){
@@ -30,9 +31,52 @@ public class TSysUserServiceImpl implements TSysUserService {
     }
 
     @Override
-    public int add(TSysUser sysUser) {
+    public List<TSysUser> getUsersByPojo(TSysUser sysUser){
+        try {
+            return sysUserMapper.getUsersByPojo(sysUser);
+        }catch (RuntimeException e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+
+
+
+    @Override
+    public int insert(TSysUser sysUser) {
         try {
             return sysUserMapper.insert(sysUser);
+        }catch (RuntimeException e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Override
+    public int deleteById(Long id) {
+        try {
+            return sysUserMapper.deleteById(id);
+        }catch (RuntimeException e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Override
+    public long count(TSysUser tSysUser) {
+        try {
+            return sysUserMapper.count(tSysUser);
+        }catch (RuntimeException e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Override
+    public int update(TSysUser tSysUser) {
+        try {
+            return sysUserMapper.update(tSysUser);
         }catch (RuntimeException e){
             e.printStackTrace();
             throw e;

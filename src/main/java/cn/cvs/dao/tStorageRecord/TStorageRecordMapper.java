@@ -17,10 +17,9 @@ public interface TStorageRecordMapper {
 
     /**
      * 查询入库记录
-     * @param tStorageRecord  查询条件
      * @return
      */
-    List<TStorageRecord> queryRecord(TStorageRecord tStorageRecord);
+    List<TStorageRecord> queryRecord();
     /**
      * 查询入库记录,包含商户名称
      * @param tStorageRecord  查询条件

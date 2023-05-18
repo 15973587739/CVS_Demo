@@ -25,4 +25,20 @@ public interface TSysRoleService {
      */
     public int add(TSysRole sysRole);
 
+    /**
+     * 修改数据
+     *
+     * @param tSysRole 实例对象
+     * @return 影响行数
+     */
+    int update(TSysRole tSysRole);
+
+    /**
+     * 通过主键删除数据
+     *
+     * @param id 主键
+     * @return 影响行数
+     */
+    int deleteById(Long id);
+
 }

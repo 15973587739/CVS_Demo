@@ -3,6 +3,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
@@ -10,7 +11,10 @@
        http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/aop
-       http://www.springframework.org/schema/aop/spring-aop.xsd"
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+"
 >
     <!--  引入database.properties文件  -->
     <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
@@ -50,7 +54,7 @@
 
     <!--扫描xml文件-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="cvs.dao"/>
+        <property name="basePackage" value="cn.cvs.dao"/>
     </bean>
 
     <!--事务管理器-->
@@ -65,7 +69,11 @@
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="get*" propagation="SUPPORTS"/>
+            <tx:method name="query*" propagation="SUPPORTS"/>
+            <tx:method name="select*" propagation="SUPPORTS"/>
+            <tx:method name="count*" propagation="SUPPORTS"/>
             <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
             <tx:method name="del" propagation="REQUIRED"/>
             <tx:method name="update" propagation="REQUIRED"/>
             <tx:method name="*" propagation="REQUIRED"/>

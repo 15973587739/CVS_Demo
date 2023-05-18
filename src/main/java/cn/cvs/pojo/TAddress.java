@@ -38,15 +38,15 @@ public class TAddress implements Serializable {
     /**
      * 创建时间
      */
-    private Date createdtime;
+    private Date createdTime;
     /**
      * 修改者
      */
-    private Long updateduserid;
+    private Long updatedUserId;
     /**
      * 修改时间
      */
-    private Date updatedtime;
+    private Date updatedTime;
     /**
      * 用户ID
      */
@@ -101,28 +101,28 @@ public class TAddress implements Serializable {
         this.createdUserId = createdUserId;
     }
 
-    public Date getCreatedtime() {
-        return createdtime;
+    public Date getCreatedTime() {
+        return createdTime;
     }
 
-    public void setCreatedtime(Date createdtime) {
-        this.createdtime = createdtime;
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
-    public Long getUpdateduserid() {
-        return updateduserid;
+    public Long getUpdatedUserId() {
+        return updatedUserId;
     }
 
-    public void setUpdateduserid(Long updateduserid) {
-        this.updateduserid = updateduserid;
+    public void setUpdatedUserId(Long updatedUserId) {
+        this.updatedUserId = updatedUserId;
     }
 
-    public Date getUpdatedtime() {
-        return updatedtime;
+    public Date getUpdatedTime() {
+        return updatedTime;
     }
 
-    public void setUpdatedtime(Date updatedtime) {
-        this.updatedtime = updatedtime;
+    public void setUpdatedTime(Date updatedTime) {
+        this.updatedTime = updatedTime;
     }
 
     public Long getUserid() {

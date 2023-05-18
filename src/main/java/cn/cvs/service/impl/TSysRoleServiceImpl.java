@@ -49,4 +49,28 @@ public class TSysRoleServiceImpl implements TSysRoleService {
         }
         return count;
     }
+
+    @Override
+    public int update(TSysRole tSysRole) {
+        int count = 0;
+        try {
+            count = sysRoleMapper.update(tSysRole);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return count;
+    }
+
+    @Override
+    public int deleteById(Long id) {
+        int count = 0;
+        try {
+            count = sysRoleMapper.deleteById(id);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return count;
+    }
 }
