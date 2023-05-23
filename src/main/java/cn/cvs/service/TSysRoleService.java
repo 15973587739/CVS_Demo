@@ -1,5 +1,6 @@
 package cn.cvs.service;
 
+import cn.cvs.pojo.TSupplier;
 import cn.cvs.pojo.TSysRole;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,6 +18,28 @@ public interface TSysRoleService {
      * @return
      */
     public List<TSysRole> getSysRoleList(@Param("roleName") String roleName);
+
+    /**
+    * @Author: SIYU
+    * @Description: TODO
+    * @DateTime: 2020
+     * 统计总行数
+     * @return 总行数
+     */
+    long count(TSysRole tSysRole);
+    /**
+    * @Author: SIYU
+    * @Description: TODO
+    * @DateTime: 2020
+    * 按条件统计列表
+    * @return 对象集合
+    * 查询指定行数据
+    * @param tSysRole 查询条件
+    * @param pageBegin         分页对象
+    */
+    List<TSysRole> queryAllByLimit(TSysRole tSysRole, @Param("pageBegin") Integer pageBegin  ,  @Param("pageSize") Integer pageSize);
+
+
 
     /**
      * 添加角色

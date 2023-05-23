@@ -19,9 +19,9 @@
         <result property="updatedUserId" column="updatedUserId" jdbcType="INTEGER"/>
     </resultMap>
 
-    <select id="count" resultType="int">
-        select count(*) from t_supplier
-    </select>
+<!--    <select id="count" resultType="int">-->
+<!--        select count(*) from t_supplier-->
+<!--    </select>-->
     <select id="getTSupplierList" resultType="TSupplier">
         select * from t_supplier
     </select>
@@ -105,7 +105,7 @@
     </select>
 
     <!--统计总行数-->
-    <select id="countS" resultType="java.lang.Long">
+    <select id="count" resultType="java.lang.Long">
         select count(1)
         from t_supplier
         <where>

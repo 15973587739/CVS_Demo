@@ -21,33 +21,28 @@ import java.util.Map;
  **/
 @Controller
 @RequestMapping(value = "/hello")
-public class HelloController extends AbstractController {
+public class HelloController {
     Logger logger = Logger.getLogger(HelloController.class);
-    @Override
-    protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println("Spring MVC 框架搭建成功。");
-        return new ModelAndView("hello");
-    }
-
+    
     @RequestMapping(value = "/hello")
     public String hello() throws Exception {
         System.out.println("Spring MVC 框架搭建成功");
-        return "hollo";
+        return "hello";
     }
     @RequestMapping(value = "/hello2")
     public String hello2() throws Exception {
         System.out.println("hello控制器下的另一个接口");
-        return "hollo";
+        return "hello";
     }
     @RequestMapping(value = "/hello3")
     public String hello3(@RequestParam(required = false) String realName) throws Exception {
         logger.info("你好"+realName+"欢迎来到Spring MVC 课堂");
-        return "hollo";
+        return "hello";
     }
     @RequestMapping(value = "/hello4")
     public String hello4(@RequestParam(value = "userName",required = false) String realName) throws Exception {
         logger.info("你好"+realName+"欢迎来到Spring MVC 课堂");
-        return "hollo";
+        return "hello";
     }
     @RequestMapping(value = "/hello5")
     public ModelAndView hello5(@RequestParam String realName) throws Exception {

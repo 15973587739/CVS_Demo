@@ -29,6 +29,36 @@ public class TSysUserServiceImpl implements TSysUserService {
             throw e;
         }
     }
+    @Override
+    public TSysUser login(String account, String password) {
+        try {
+            TSysUser user = sysUserMapper.getUsersByAccount(account);
+            if(user == null){
+               System.out.println("用户不存在");
+                return null;
+            }else {
+                if (user.getPassword().equals(password)){
+                    return user;
+                }else {
+                    return null;
+                }
+            }
+
+        }catch (RuntimeException e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Override
+    public TSysUser queryById(Long id) {
+        try {
+            return sysUserMapper.queryById(id);
+        }catch (RuntimeException e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
 
     @Override
     public List<TSysUser> getUsersByPojo(TSysUser sysUser){
@@ -40,7 +70,15 @@ public class TSysUserServiceImpl implements TSysUserService {
         }
     }
 
-
+    @Override
+    public List<TSysUser> selectPageList(String realName, int realId, Integer pageBegin, Integer pageSize) {
+        try {
+            return sysUserMapper.selectPageList(realName,realId,pageBegin,pageSize);
+        }catch (RuntimeException e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
 
 
     @Override
@@ -82,6 +120,7 @@ public class TSysUserServiceImpl implements TSysUserService {
             throw e;
         }
     }
+
 
     public void setSysUserMapper(TSysUserMapper sysUserMapper) {
         this.sysUserMapper = sysUserMapper;

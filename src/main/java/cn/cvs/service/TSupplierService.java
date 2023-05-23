@@ -19,6 +19,22 @@ public interface TSupplierService {
     public List<TSupplier> selectByName(String supName);
 
     /**
+     * 统计总行数
+     * @return 总行数
+     */
+    long count(TSupplier tSupplier);
+
+    /**
+     * 查询指定行数据
+     *
+     * @param tSupplier 查询条件
+     * @param pageBegin         分页对象
+     * @return 对象列表
+     */
+    List<TSupplier> queryAllByLimit(TSupplier tSupplier, @Param("pageBegin") Integer pageBegin  ,  @Param("pageSize") Integer pageSize);
+
+
+    /**
      * 添加用户
      * @param supplier
      * @return

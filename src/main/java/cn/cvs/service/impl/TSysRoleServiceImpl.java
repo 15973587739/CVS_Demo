@@ -1,6 +1,7 @@
 package cn.cvs.service.impl;
 
 import cn.cvs.dao.tSysRole.TSysRoleMapper;
+import cn.cvs.pojo.TSupplier;
 import cn.cvs.pojo.TSysRole;
 import cn.cvs.service.TSysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,30 @@ public class TSysRoleServiceImpl implements TSysRoleService {
         }
         return list;
     }
+
+    @Override
+    public long count(TSysRole tSysRole) {
+        int count = 0;
+        try {
+            count = (int) sysRoleMapper.count(tSysRole);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return count;
+    }
+
+    @Override
+    public List<TSysRole> queryAllByLimit(TSysRole tSysRole, Integer pageBegin, Integer pageSize) {
+        List<TSysRole> list = new ArrayList<>();
+        try {
+            list = sysRoleMapper.queryAllByLimit(tSysRole, pageBegin, pageSize);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 
     @Override
     public int add(TSysRole sysRole) {

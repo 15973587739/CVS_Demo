@@ -19,7 +19,7 @@ public interface TSupplierMapper {
      * 统计总行数
      * @return 总行数
      */
-    long count();
+    long count(TSupplier tSupplier);
 
     /**
      * 集合返回

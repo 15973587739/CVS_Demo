@@ -19,9 +19,9 @@
 >
     <mvc:annotation-driven/>
     <context:component-scan base-package="cn.cvs.controller"/>
-    <bean name="/hello" class="cn.cvs.controller.HelloController"/>
+<!--    <bean name="/hello" class="cn.cvs.controller.HelloController"/>-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 </beans>

@@ -32,6 +32,29 @@ public class TSupplierServiceImpl implements TSupplierService {
     }
 
     @Override
+    public long count(TSupplier tSupplier) {
+        int count = 0;
+        try {
+            count = (int) supplierMapper.count(tSupplier);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return count;
+    }
+
+    @Override
+    public List<TSupplier> queryAllByLimit(TSupplier tSupplier, Integer pageBegin, Integer pageSize) {
+        List<TSupplier> list = new ArrayList<>();
+        try {
+            list = supplierMapper.queryAllByLimit(tSupplier, pageBegin, pageSize);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
     public int add(TSupplier supplier) {
         int count = 0;
         try {

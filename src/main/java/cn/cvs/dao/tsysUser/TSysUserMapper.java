@@ -30,10 +30,10 @@ public interface TSysUserMapper {
 
     /**
      * 根据用户真实姓名模糊匹配查询用户
-     * @param realName 用户真实姓名
+     * @param account 用户名
      * @return
      */
-    public List<TSysUser> getUsersByRealName(String realName);
+    public TSysUser getUsersByAccount(String account);
 
     /**
      * 查询用户列表

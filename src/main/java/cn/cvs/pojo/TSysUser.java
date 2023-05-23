@@ -1,5 +1,10 @@
 package cn.cvs.pojo;
 
+import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Past;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -19,14 +24,18 @@ public class TSysUser implements Serializable {
     /**
      * 账号
      */
+    @NotEmpty(message = "账号不能为空")
     private String account;
     /**
      * 真是姓名
      */
+    @NotEmpty(message = "姓名不能为空")
     private String realName;
     /**
      * 密码
      */
+    @NotEmpty(message = "密码不能为空")
+    @Length(min = 6, max = 10, message = "密码长度应为6-10位")
     private String password;
     /**
      * 性别（1:女、 2:男）
@@ -35,6 +44,8 @@ public class TSysUser implements Serializable {
     /**
      * 出生日期（年-月-日）
      */
+    @Past(message = "出生日期格式不正确")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
     /**
      * 手机号码
@@ -59,6 +70,7 @@ public class TSysUser implements Serializable {
     /**
      * 创建时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdTime;
     /**
      * 修改人
@@ -67,12 +79,33 @@ public class TSysUser implements Serializable {
     /**
      * 修改时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedTime;
     /**
      * 角色名称
      */
     private TSysRole sysRole;
     private List<TAddress> addressList;
+
+    public TSysUser() {
+
+    }
+
+    public TSysUser(Long id, String account, String realName, String password, Integer sex, String phone, String address, Long roleId, Long createdUserId, Date createdTime, Long updatedUserId, Date updatedTime) {
+        this.id = id;
+        this.account = account;
+        this.realName = realName;
+        this.password = password;
+        this.sex = sex;
+        this.phone = phone;
+        this.address = address;
+        this.roleId = roleId;
+        this.createdUserId = createdUserId;
+        this.createdTime = createdTime;
+        this.updatedUserId = updatedUserId;
+        this.updatedTime = updatedTime;
+
+    }
 
     @Override
     public String toString() {
