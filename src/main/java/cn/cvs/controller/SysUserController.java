@@ -10,16 +10,20 @@ import cn.cvs.utils.Constants;
 import cn.cvs.utils.Pager;
 import com.mysql.cj.Session;
 import jdk.internal.org.objectweb.asm.tree.analysis.Value;
+import org.apache.commons.io.FilenameUtils;
 import org.jboss.logging.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -194,7 +198,70 @@ public class SysUserController {
         }
         return "sysUser/add";
     }
+    @PostMapping("/add")
+    public String add(TSysUser user, HttpSession session, HttpServletRequest request,@RequestParam(value = "attachs",required = false)MultipartFile[] files){
+        String idPicPath = null;
+        String workPath = null;
+        String errorInfo = null;
+        Boolean flag = null;
+        String path = request.getSession().getServletContext().getRealPath("statics"+ File.separator + "upload files");
+        logger.info("path:"+path);
+        for (int i = 0; i < files.length; i++){
+            MultipartFile attach = files[i];
+            if (!attach.isEmpty()) {
+                if (i==0){
+                    errorInfo = "uploadFileError";
+                }else if (i == 1){
+                    errorInfo = "uploadWpError";
+                }
+                String oldFileName = attach.getOriginalFilename();
+                logger.info("oldFileName:"+oldFileName);
+                String prefix = FilenameUtils.getExtension(oldFileName);
+                logger.info("prefix:"+prefix);
+                int fileSize = 500000;
+                logger.info("上传文件大小:"+attach.getSize() / 1024+" KB");
+                if (attach.getSize()>fileSize){
+                    request.setAttribute(errorInfo, "文件大小超出限制 5M");
+                    flag = false;
+                }else if (prefix.equalsIgnoreCase("jpeg")|| prefix.equalsIgnoreCase("jpg") || prefix.equalsIgnoreCase("gif")|| prefix.equalsIgnoreCase("png")) {
+                    String fileName = System.currentTimeMillis() + "."+FilenameUtils.getExtension(oldFileName);
 
+                    logger.info("fileName:"+fileName);
+                    File targetFile = new File(path);
+                    if (!targetFile.exists()) {
+                        targetFile.mkdirs();
+                    }
+                    try {
+                        attach.transferTo(new File(targetFile,fileName));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        request.setAttribute(errorInfo, "文件上传失败");
+                        flag = false;
+                        throw new RuntimeException(e);
+                    }
+                    if (i == 0) {
+                        idPicPath = File.separator + "statics"+File.separator+"upload files"+File.separator+fileName;
+                    }else if(i == 1) {
+                        workPath = File.separator+"statics"+File.separator + "upload files"+File.separator + fileName;
+                    }
+                    logger.info("idPicPath:"+idPicPath);
+                    logger.info("workPicPath"+workPath);
+                }else {
+                    request.setAttribute(errorInfo, "图片类型不正确");
+                    flag = false;
+                }
+            }
+        }
+        if (flag) {
+            user.setCreatedUserId(((TSysUser) session.getAttribute(Constants.USER_SESSION)).getId());
+
+            user.setCreatedUserId(((TSysUser)session.getAttribute(Constants.USER_SESSION)).getId());
+            if (service.insert(user)>0){
+                return "redirecet:/user/list";
+            }
+        }
+        return "sysUser/add";
+    }
 //    更新
     @GetMapping("/toUpdate")
     public String toUpdate(String id, Model model) {
