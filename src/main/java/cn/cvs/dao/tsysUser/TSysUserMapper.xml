@@ -32,8 +32,11 @@
         select * from t_sys_user
     </select>
 
-    <select id="getUsersByAccount" resultType="cn.cvs.pojo.TSysUser" parameterType="String">
-        select * from t_sys_user where account = #{param}
+    <select id="getUsersByAccount" resultType="TSysUser" parameterType="string">
+        select * from t_sys_user
+        <where>
+            and account=#{account}
+        </where>
     </select>
 
     <select id="getUsersByPojo" resultType="cn.cvs.pojo.TSysUser" parameterType="TSysUser">
@@ -56,19 +59,6 @@
         select u.*,r.roleName from t_sys_user u,t_sys_role r where u.realName like CONCAT('%',#{realName},'%') and u.roleId = #{roleId} and u.roleId=r.id
     </select>
 
-    <resultMap id="userWithSysRole" type="TSysRole">
-        <id property="id" column="id"/>
-        <result property="realName" column="realName"/>
-        <!--sysRole关联对象-->
-        <association property="sysRole" javaType="TSysRole">
-            <id property="id" column="rid"/>
-            <result property="code" column="code"/>
-            <result property="roleName" column="roleName"/>
-        </association>
-    </resultMap>
-    <select id="getUserListByRoleId" parameterType="int" resultMap="userWithSysRole">
-        select u.*,r.id as rid,r.code,r.roleName from  t_sys_user u,t_sys_role r where u.roleId = #{roleId} and u.roleId=r.id
-    </select>
 
     <resultMap id="userWithAddresses" type="TSysUser">
         <id property="id" column="id"/>

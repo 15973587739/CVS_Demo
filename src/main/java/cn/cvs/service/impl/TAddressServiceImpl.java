@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
+
 /**
  * @Author: SIYU
  * @Description: TODO
@@ -17,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("addressService")
 public class TAddressServiceImpl implements TAddressService {
 
-    @Autowired
+    @Resource
     private TAddressMapper addressMapper;
 
     @Override

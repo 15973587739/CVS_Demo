@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
 @Transactional
 @Service("sysRoleService")
 public class TSysRoleServiceImpl implements TSysRoleService {
-    @Autowired
+    @Resource
     private TSysRoleMapper sysRoleMapper;
 
 

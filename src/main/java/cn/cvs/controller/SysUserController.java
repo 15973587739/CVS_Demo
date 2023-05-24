@@ -12,6 +12,7 @@ import com.mysql.cj.Session;
 import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 import org.apache.commons.io.FilenameUtils;
 import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,23 +41,10 @@ public class SysUserController {
     private Logger logger = Logger.getLogger(SysUserController.class);
     private ArrayList<TSysUser> sysUsers = new ArrayList<TSysUser>();
     private ArrayList<TSysUser> queryUsers = new ArrayList<TSysUser>();
+    @Autowired
     TSysUserService service = new TSysUserServiceImpl();
+    @Autowired
     TSysRoleService roleService = new TSysRoleServiceImpl();
-
-    public SysUserController() {
-        try {
-            sysUsers.add(new TSysUser(25L,"ads","阿达","67787878",1,"23421433","上海区1",2L,1L,new Date(),1L,new Date()));
-            sysUsers.add(new TSysUser(45L,"adsf","阿1达","67787878",1,"23421243","上海区2",13L,1L,new Date(),1L,new Date()));
-            sysUsers.add(new TSysUser(55L,"adsg","阿2达","67787878",1,"23421343","上海区3",12L,1L,new Date(),1L,new Date()));
-            sysUsers.add(new TSysUser(65L,"adds","阿3达","67787878",1,"23421143","上海区4",11L,1L,new Date(),1L,new Date()));
-            sysUsers.add(new TSysUser(75L,"adfs","阿4达","67787878",1,"23432143","上海区5",10L,1L,new Date(),1L,new Date()));
-            sysUsers.add(new TSysUser(85L,"ades","阿5达","67787878",1,"23442143","上海区6",16L,1L,new Date(),1L,new Date()));
-            sysUsers.add(new TSysUser(65L,"adgs","阿3达","67787878",1,"23425143","上海区7",15L,1L,new Date(),1L,new Date()));
-        }catch (Exception e) {
-            logger.error(e.getMessage());
-            e.printStackTrace();
-        }
-    }
 
     @RequestMapping(value="/toLogin")
     public String login(){
@@ -110,30 +98,30 @@ public class SysUserController {
         logger.info("保存用户详细");
         return null;
     }
-    @GetMapping(value ="list")
-    public String list(Model model) throws Exception {
-        logger.info("单查询条件为空时，查询用户信息");
-        queryUsers.clear();
-        queryUsers.addAll(sysUsers);
-        model.addAttribute("queryUsers",queryUsers);
-        return "sysUser/sysUserList";
-    }
-    @PostMapping("/list")
-    public String list(@RequestParam(value="realName",required = false) String realName, Model model) throws Exception {
-        logger.info("查询条件:realName = " + realName+",查询用户信息");
-        queryUsers.clear();
-        if (realName != null && realName.equals("")) {
-            for (TSysUser user : queryUsers){
-                if (user.getRealName().indexOf(realName)!= -1){
-                    queryUsers.add(user);
-                }
-            }
-        }else {
-            queryUsers.addAll(sysUsers);
-        }
-        model.addAttribute("queryUsers", queryUsers);
-        return "sysUser/sysUserList";
-    }
+//    @GetMapping(value ="list")
+//    public String list(Model model) throws Exception {
+//        logger.info("单查询条件为空时，查询用户信息");
+//        queryUsers.clear();
+//        queryUsers.addAll(sysUsers);
+//        model.addAttribute("queryUsers",queryUsers);
+//        return "sysUser/sysUserList";
+//    }
+//    @PostMapping("/list")
+//    public String list(@RequestParam(value="realName",required = false) String realName, Model model) throws Exception {
+//        logger.info("查询条件:realName = " + realName+",查询用户信息");
+//        queryUsers.clear();
+//        if (realName != null && realName.equals("")) {
+//            for (TSysUser user : queryUsers){
+//                if (user.getRealName().indexOf(realName)!= -1){
+//                    queryUsers.add(user);
+//                }
+//            }
+//        }else {
+//            queryUsers.addAll(sysUsers);
+//        }
+//        model.addAttribute("queryUsers", queryUsers);
+//        return "sysUser/sysUserList";
+//    }
 
     @GetMapping("/list")
     public String getUserList(Model model,String realName,Long roleId, @RequestParam(defaultValue = "1")Integer pageIndex){
@@ -198,70 +186,70 @@ public class SysUserController {
         }
         return "sysUser/add";
     }
-    @PostMapping("/add")
-    public String add(TSysUser user, HttpSession session, HttpServletRequest request,@RequestParam(value = "attachs",required = false)MultipartFile[] files){
-        String idPicPath = null;
-        String workPath = null;
-        String errorInfo = null;
-        Boolean flag = null;
-        String path = request.getSession().getServletContext().getRealPath("statics"+ File.separator + "upload files");
-        logger.info("path:"+path);
-        for (int i = 0; i < files.length; i++){
-            MultipartFile attach = files[i];
-            if (!attach.isEmpty()) {
-                if (i==0){
-                    errorInfo = "uploadFileError";
-                }else if (i == 1){
-                    errorInfo = "uploadWpError";
-                }
-                String oldFileName = attach.getOriginalFilename();
-                logger.info("oldFileName:"+oldFileName);
-                String prefix = FilenameUtils.getExtension(oldFileName);
-                logger.info("prefix:"+prefix);
-                int fileSize = 500000;
-                logger.info("上传文件大小:"+attach.getSize() / 1024+" KB");
-                if (attach.getSize()>fileSize){
-                    request.setAttribute(errorInfo, "文件大小超出限制 5M");
-                    flag = false;
-                }else if (prefix.equalsIgnoreCase("jpeg")|| prefix.equalsIgnoreCase("jpg") || prefix.equalsIgnoreCase("gif")|| prefix.equalsIgnoreCase("png")) {
-                    String fileName = System.currentTimeMillis() + "."+FilenameUtils.getExtension(oldFileName);
-
-                    logger.info("fileName:"+fileName);
-                    File targetFile = new File(path);
-                    if (!targetFile.exists()) {
-                        targetFile.mkdirs();
-                    }
-                    try {
-                        attach.transferTo(new File(targetFile,fileName));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        request.setAttribute(errorInfo, "文件上传失败");
-                        flag = false;
-                        throw new RuntimeException(e);
-                    }
-                    if (i == 0) {
-                        idPicPath = File.separator + "statics"+File.separator+"upload files"+File.separator+fileName;
-                    }else if(i == 1) {
-                        workPath = File.separator+"statics"+File.separator + "upload files"+File.separator + fileName;
-                    }
-                    logger.info("idPicPath:"+idPicPath);
-                    logger.info("workPicPath"+workPath);
-                }else {
-                    request.setAttribute(errorInfo, "图片类型不正确");
-                    flag = false;
-                }
-            }
-        }
-        if (flag) {
-            user.setCreatedUserId(((TSysUser) session.getAttribute(Constants.USER_SESSION)).getId());
-
-            user.setCreatedUserId(((TSysUser)session.getAttribute(Constants.USER_SESSION)).getId());
-            if (service.insert(user)>0){
-                return "redirecet:/user/list";
-            }
-        }
-        return "sysUser/add";
-    }
+//    @PostMapping("/add")
+//    public String add(TSysUser user, HttpSession session, HttpServletRequest request,@RequestParam(value = "attachs",required = false)MultipartFile[] files){
+//        String idPicPath = null;
+//        String workPath = null;
+//        String errorInfo = null;
+//        Boolean flag = null;
+//        String path = request.getSession().getServletContext().getRealPath("statics"+ File.separator + "upload files");
+//        logger.info("path:"+path);
+//        for (int i = 0; i < files.length; i++){
+//            MultipartFile attach = files[i];
+//            if (!attach.isEmpty()) {
+//                if (i==0){
+//                    errorInfo = "uploadFileError";
+//                }else if (i == 1){
+//                    errorInfo = "uploadWpError";
+//                }
+//                String oldFileName = attach.getOriginalFilename();
+//                logger.info("oldFileName:"+oldFileName);
+//                String prefix = FilenameUtils.getExtension(oldFileName);
+//                logger.info("prefix:"+prefix);
+//                int fileSize = 500000;
+//                logger.info("上传文件大小:"+attach.getSize() / 1024+" KB");
+//                if (attach.getSize()>fileSize){
+//                    request.setAttribute(errorInfo, "文件大小超出限制 5M");
+//                    flag = false;
+//                }else if (prefix.equalsIgnoreCase("jpeg")|| prefix.equalsIgnoreCase("jpg") || prefix.equalsIgnoreCase("gif")|| prefix.equalsIgnoreCase("png")) {
+//                    String fileName = System.currentTimeMillis() + "."+FilenameUtils.getExtension(oldFileName);
+//
+//                    logger.info("fileName:"+fileName);
+//                    File targetFile = new File(path);
+//                    if (!targetFile.exists()) {
+//                        targetFile.mkdirs();
+//                    }
+//                    try {
+//                        attach.transferTo(new File(targetFile,fileName));
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                        request.setAttribute(errorInfo, "文件上传失败");
+//                        flag = false;
+//                        throw new RuntimeException(e);
+//                    }
+//                    if (i == 0) {
+//                        idPicPath = File.separator + "statics"+File.separator+"upload files"+File.separator+fileName;
+//                    }else if(i == 1) {
+//                        workPath = File.separator+"statics"+File.separator + "upload files"+File.separator + fileName;
+//                    }
+//                    logger.info("idPicPath:"+idPicPath);
+//                    logger.info("workPicPath"+workPath);
+//                }else {
+//                    request.setAttribute(errorInfo, "图片类型不正确");
+//                    flag = false;
+//                }
+//            }
+//        }
+//        if (flag) {
+//            user.setCreatedUserId(((TSysUser) session.getAttribute(Constants.USER_SESSION)).getId());
+//
+//            user.setCreatedUserId(((TSysUser)session.getAttribute(Constants.USER_SESSION)).getId());
+//            if (service.insert(user)>0){
+//                return "redirecet:/user/list";
+//            }
+//        }
+//        return "sysUser/add";
+//    }
 //    更新
     @GetMapping("/toUpdate")
     public String toUpdate(String id, Model model) {

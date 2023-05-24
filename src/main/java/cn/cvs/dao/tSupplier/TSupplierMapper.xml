@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.cvs.dao.tSupplier.TSupplierMapper">
 
-    <resultMap type="cn.cvs.pojo.TSupplier" id="TSupplierMap">
+    <resultMap type="TSupplier" id="TSupplierMap">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="supCode" column="supCode" jdbcType="VARCHAR"/>
         <result property="supName" column="supName" jdbcType="VARCHAR"/>
