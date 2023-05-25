@@ -66,13 +66,6 @@ public interface TSysUserMapper {
     public List<TSysUser> getUserListWithRoleName(TSysUser sysUser);
 
 
-    /**
-     * 根据角色id查询用户，包含系统角色实例
-     * @param roleId
-     * @return
-     */
-    public List<TSysUser> getUserListByRoleId(@Param("roleId") Integer roleId);
-
 
     /**
      * 根据用户ID查询用户及相关地址
@@ -120,7 +113,7 @@ public interface TSysUserMapper {
      * @param pageBegin         分页对象
      * @return 对象列表
      */
-    List<TSysUser> selectPageList(@Param("reName")String realName, @Param("roId")int realId,  @Param("pageBegin") Integer pageBegin  ,  @Param("pageSize") Integer pageSize);
+    List<TSysUser> selectPageList(@Param("realName")String realName, @Param("realId")Integer realId,  @Param("pageBegin") Integer pageBegin  ,  @Param("pageSize") Integer pageSize);
 
     /**
      * 查询指定行数据

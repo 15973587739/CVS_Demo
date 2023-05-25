@@ -30,15 +30,15 @@
          <h2 class="leftH2"><span class="span1"></span>菜单 <span></span></h2>
          <nav>
              <ul class="list">
-              <li ><a href="${pageContext.request.contextPath }/sys/storageRecord/list">入库记录信息</a></li>
-              <li><a href="${pageContext.request.contextPath }/sys/supplier/list">供货商信息</a></li>
-              <li><a href="${pageContext.request.contextPath }/sys/user/list">用户信息</a></li>
-              <li><a href="${pageContext.request.contextPath }/sys/role/list">角色管理</a></li>
-              <li><a href="${pageContext.request.contextPath }/sys/user/toUpdatePwd">修改密码</a></li>
+              <li ><a href="${pageContext.request.contextPath }/storageRecord/list">入库记录信息</a></li>
+              <li><a href="${pageContext.request.contextPath }/sup/list">供货商信息</a></li>
+              <li><a href="${pageContext.request.contextPath }/user/list">用户信息</a></li>
+              <li><a href="${pageContext.request.contextPath }/sysRole/list">角色管理</a></li>
+              <li><a href="${pageContext.request.contextPath }/user/toUpdatePwd">修改密码</a></li>
               <li><a href="${pageContext.request.contextPath }/logout">退出系统</a></li>
              </ul>
          </nav>
      </div>
      <input type="hidden" id="path" name="path" value="${pageContext.request.contextPath }"/>
      <input type="hidden" id="referer" name="referer" value="<%=request.getHeader("Referer")%>"/>
-  <!-- </section> -->
+<%-- </section>--%>

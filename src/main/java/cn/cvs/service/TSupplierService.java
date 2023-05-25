@@ -31,7 +31,7 @@ public interface TSupplierService {
      * @param pageBegin         分页对象
      * @return 对象列表
      */
-    List<TSupplier> queryAllByLimit(TSupplier tSupplier, @Param("pageBegin") Integer pageBegin  ,  @Param("pageSize") Integer pageSize);
+    List<TSupplier> queryAllByLimit(TSupplier tSupplier, Integer pageBegin ,Integer pageSize);
 
 
     /**

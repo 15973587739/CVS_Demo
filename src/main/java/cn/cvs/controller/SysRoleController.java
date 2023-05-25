@@ -9,6 +9,7 @@ import cn.cvs.service.impl.TSysRoleServiceImpl;
 import cn.cvs.utils.Constants;
 import cn.cvs.utils.Pager;
 import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,14 +28,15 @@ import java.util.List;
 public class SysRoleController {
     private Logger logger = Logger.getLogger(SysRoleController.class);
 
-    TSysRoleService service = new TSysRoleServiceImpl();
+    @Autowired
+    TSysRoleService service ;
 
     @GetMapping("/list")
     public String getList(Model model){
-        List<TSysRole> sysRoles = null;
+        List<TSysRole> roleList = null;
         try {
-            sysRoles = service.getSysRoleList("");
-            model.addAttribute("sysRoles",sysRoles);
+            roleList = service.getSysRoleList("");
+            model.addAttribute("roleList",roleList);
         }catch (Exception e) {
             e.printStackTrace();
             logger.error("表接口访问失败");

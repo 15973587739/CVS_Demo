@@ -37,7 +37,7 @@ public interface TSysUserService {
      * @param pageBegin         分页对象
      * @return 对象列表
      */
-    List<TSysUser> selectPageList(@Param("reName")String realName, @Param("roId")int realId,  @Param("pageBegin") Integer pageBegin  ,  @Param("pageSize") Integer pageSize);
+    List<TSysUser> selectPageList(String realName, Integer realId,  Integer pageBegin  , Integer pageSize);
 
     /**
      * 新增数据
@@ -71,4 +71,6 @@ public interface TSysUserService {
     int update(TSysUser tSysUser);
 
     TSysUser login(String account, String password);
+
+    List<TSysUser> list(String realName, Integer realId,  Integer pageBegin  , Integer pageSize);
 }

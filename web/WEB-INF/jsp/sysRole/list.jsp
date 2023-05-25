@@ -7,7 +7,7 @@
                 <span>角色管理页面</span>
             </div>
             <div class="search">
-           		<a href="${pageContext.request.contextPath}/sys/role/toAdd" >添加角色</a>
+           		<a href="${pageContext.request.contextPath}/role/toAdd" >添加角色</a>
             </div>
             <table class="supplierTable" cellpadding="0" cellspacing="0">
                 <tr class="firstTr">

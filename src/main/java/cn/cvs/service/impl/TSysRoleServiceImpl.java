@@ -20,7 +20,7 @@ import java.util.List;
 @Transactional
 @Service("sysRoleService")
 public class TSysRoleServiceImpl implements TSysRoleService {
-    @Resource
+    @Autowired
     private TSysRoleMapper sysRoleMapper;
 
 

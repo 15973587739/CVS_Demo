@@ -15,7 +15,7 @@ public class TSupplier implements Serializable {
     /**
      * 主键ID
      */
-    private Long id;
+    private Integer id;
     /**
      * 供货商编号
      */
@@ -47,7 +47,7 @@ public class TSupplier implements Serializable {
     /**
      * 创建人id
      */
-    private Long createdUserId;
+    private Integer createdUserId;
     /**
      * 创建时间
      */
@@ -59,7 +59,7 @@ public class TSupplier implements Serializable {
     /**
      * 修改人id
      */
-    private Long updatedUserId;
+    private Integer updatedUserId;
 
     @Override
     public String toString() {
@@ -78,11 +78,11 @@ public class TSupplier implements Serializable {
     private List<TStorageRecord> recordList;
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -142,11 +142,11 @@ public class TSupplier implements Serializable {
         this.supFax = supFax;
     }
 
-    public Long getCreatedUserId() {
+    public Integer getCreatedUserId() {
         return createdUserId;
     }
 
-    public void setCreatedUserId(Long createdUserId) {
+    public void setCreatedUserId(Integer createdUserId) {
         this.createdUserId = createdUserId;
     }
 
@@ -166,11 +166,11 @@ public class TSupplier implements Serializable {
         this.updatedTime = updatedTime;
     }
 
-    public Long getUpdatedUserId() {
+    public Integer getUpdatedUserId() {
         return updatedUserId;
     }
 
-    public void setUpdatedUserId(Long updatedUserId) {
+    public void setUpdatedUserId(Integer updatedUserId) {
         this.updatedUserId = updatedUserId;
     }
 

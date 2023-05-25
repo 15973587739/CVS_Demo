@@ -8,7 +8,7 @@
             <span>供货商管理页面</span>
         </div>
         <div class="search">
-        	<form method="get" action="${pageContext.request.contextPath }/sys/supplier/list">
+        	<form method="get" action="${pageContext.request.contextPath }/sup/list">
 				<span>供货商编码：</span>
 				<input name="querySupCode" type="text" value="${querySupCode }">
 				
@@ -16,7 +16,7 @@
 				<input name="querySupName" type="text" value="${querySupName }">
 				<input type="hidden" name="pageIndex" value="1"/>
 				<input value="查 询" type="submit" id="searchbutton">
-				<a href="${pageContext.request.contextPath }/sys/supplier/toAdd">添加</a>
+				<a href="${pageContext.request.contextPath }/sup/toAdd">添加</a>
 			</form>
         </div>
         <!--供货商操作表格-->
@@ -63,7 +63,7 @@
 	    <input type="hidden" id="totalPageCount" value="${totalPageCount}"/>
 		<c:import url="/WEB-INF/jsp/sysRole/rollpage.jsp">
 			<c:param name="totalCount" value="${totalCount}"/>
-			<c:param name="currentPageNo" value="${currentPageNo}"/>
+			<c:param name="pageIndex" value="${pageIndex}"/>
 			<c:param name="totalPageCount" value="${totalPageCount}"/>
 		</c:import>
     </div>

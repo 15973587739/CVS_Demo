@@ -8,6 +8,7 @@ import cn.cvs.service.impl.TSupplierServiceImpl;
 import cn.cvs.utils.Constants;
 import cn.cvs.utils.Pager;
 import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,11 +27,12 @@ import java.util.List;
  * @DateTime: 2023/5/18 10:03
  **/
 @Controller
-@RequestMapping(value = "/supplier")
+@RequestMapping(value = "/sup")
 public class SupplierController{
     private Logger logger = Logger.getLogger(SupplierController.class);
 
-    TSupplierService service = new TSupplierServiceImpl();
+    @Autowired
+    TSupplierService service ;
 
     @GetMapping("/list")
     public String getList(Model model, String querySupCode, String querySupName, @RequestParam(defaultValue = "1")Integer pageIndex){
@@ -40,14 +42,15 @@ public class SupplierController{
             TSupplier sup = new TSupplier();
             sup.setSupCode(querySupCode);
             sup.setSupName(querySupName);
-            Long totalCount = service.count(sup);
 
-            Pager page = new Pager();
-            page.setPageNo(pageIndex);
-            page.setPageSize(pageSize);
-            page.setPageCount(Math.toIntExact(totalCount));
+            int totalCount = (int) service.count(sup);
 
-            int totalPageCount = page.getRowCount();
+            if (totalCount < 0){
+                totalCount = 1;
+            }
+            Pager page = new Pager(totalCount, pageSize,pageIndex);
+
+            int totalPageCount = page.getPageCount();
             if (pageIndex > totalPageCount){
                 pageIndex = totalPageCount;
                 throw  new RuntimeException("页码不正确");
@@ -63,7 +66,7 @@ public class SupplierController{
         }catch (Exception e) {
             e.printStackTrace();
             logger.error("供货商列表接口访问失败");
-            return "redirect:/supplier/toSysError";
+            return "redirect:/sysError";
         }
         return "supplier/list";
     }

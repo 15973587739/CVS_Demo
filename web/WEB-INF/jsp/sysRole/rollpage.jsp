@@ -13,13 +13,13 @@
 <body>
  		<div class="page-bar">
 			<ul class="page-num-ul clearfix">
-				<li>共${param.totalCount }条记录&nbsp;&nbsp; ${param.currentPageNo }/${param.totalPageCount }页</li>
-				<c:if test="${param.currentPageNo > 1}">
+				<li>共${param.totalCount }条记录&nbsp;&nbsp; ${param.pageIndex }/${param.totalPageCount }页</li>
+				<c:if test="${param.pageIndex > 1}">
 					<a href="javascript:page_nav(document.forms[0],1);">首页</a>
-					<a href="javascript:page_nav(document.forms[0],${param.currentPageNo-1});">上一页</a>
+					<a href="javascript:page_nav(document.forms[0],${param.pageIndex-1});">上一页</a>
 				</c:if>
-				<c:if test="${param.currentPageNo < param.totalPageCount }">
-					<a href="javascript:page_nav(document.forms[0],${param.currentPageNo+1 });">下一页</a>
+				<c:if test="${param.pageIndex < param.totalPageCount }">
+					<a href="javascript:page_nav(document.forms[0],${param.pageIndex+1 });">下一页</a>
 					<a href="javascript:page_nav(document.forms[0],${param.totalPageCount });">尾页</a>
 				</c:if>
 				&nbsp;&nbsp;

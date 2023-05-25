@@ -14,7 +14,7 @@ public class TSysRole implements Serializable {
     /**
      * 主键ID
      */
-    private Long id;
+    private Integer id;
     /**
      * 角色编码
      */
@@ -26,7 +26,7 @@ public class TSysRole implements Serializable {
     /**
      * 创建者
      */
-    private Long createdUserId;
+    private Integer createdUserId;
     /**
      * 创建时间
      */
@@ -34,7 +34,7 @@ public class TSysRole implements Serializable {
     /**
      * 修改者
      */
-    private Long updatedUserId;
+    private Integer updatedUserId;
 
     @Override
     public String toString() {
@@ -55,11 +55,11 @@ public class TSysRole implements Serializable {
     private Date updatedTime;
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -79,11 +79,11 @@ public class TSysRole implements Serializable {
         this.roleName = roleName;
     }
 
-    public Long getCreatedUserId() {
+    public Integer getCreatedUserId() {
         return createdUserId;
     }
 
-    public void setCreatedUserId(Long createdUserId) {
+    public void setCreatedUserId(Integer createdUserId) {
         this.createdUserId = createdUserId;
     }
 
@@ -95,11 +95,11 @@ public class TSysRole implements Serializable {
         this.createdTime = createdTime;
     }
 
-    public Long getUpdatedUserId() {
+    public Integer getUpdatedUserId() {
         return updatedUserId;
     }
 
-    public void setUpdatedUserId(Long updatedUserId) {
+    public void setUpdatedUserId(Integer updatedUserId) {
         this.updatedUserId = updatedUserId;
     }
 

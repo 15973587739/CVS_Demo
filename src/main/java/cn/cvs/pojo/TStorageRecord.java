@@ -14,7 +14,7 @@ public class TStorageRecord implements Serializable {
     /**
      * 主键ID
      */
-    private Long id;
+    private Integer id;
     /**
      * 入库记录编码
      */
@@ -46,7 +46,7 @@ public class TStorageRecord implements Serializable {
     /**
      * 创建人id
      */
-    private Long createdUserId;
+    private Integer createdUserId;
     /**
      * 创建时间
      */
@@ -54,7 +54,7 @@ public class TStorageRecord implements Serializable {
     /**
      * 修改人id
      */
-    private Long updatedUserId;
+    private Integer updatedUserId;
     /**
      * 修改时间
      */
@@ -63,7 +63,7 @@ public class TStorageRecord implements Serializable {
     /**
      * 供货商ID
      */
-    private Long supplierId;
+    private Integer supplierId;
 
     /**
      * 供货商名称
@@ -88,11 +88,11 @@ public class TStorageRecord implements Serializable {
                 '}';
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -152,11 +152,11 @@ public class TStorageRecord implements Serializable {
         this.payStatus = payStatus;
     }
 
-    public Long getCreatedUserId() {
+    public Integer getCreatedUserId() {
         return createdUserId;
     }
 
-    public void setCreatedUserId(Long createdUserId) {
+    public void setCreatedUserId(Integer createdUserId) {
         this.createdUserId = createdUserId;
     }
 
@@ -168,11 +168,11 @@ public class TStorageRecord implements Serializable {
         this.createdTime = createdTime;
     }
 
-    public Long getUpdatedUserId() {
+    public Integer getUpdatedUserId() {
         return updatedUserId;
     }
 
-    public void setUpdatedUserId(Long updatedUserId) {
+    public void setUpdatedUserId(Integer updatedUserId) {
         this.updatedUserId = updatedUserId;
     }
 
@@ -184,11 +184,11 @@ public class TStorageRecord implements Serializable {
         this.updatedTime = updatedTime;
     }
 
-    public Long getSupplierId() {
+    public Integer getSupplierId() {
         return supplierId;
     }
 
-    public void setSupplierId(Long supplierId) {
+    public void setSupplierId(Integer supplierId) {
         this.supplierId = supplierId;
 //        this.supplier.setId(supplierId);
     }

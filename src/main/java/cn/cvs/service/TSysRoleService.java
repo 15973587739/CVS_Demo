@@ -17,7 +17,7 @@ public interface TSysRoleService {
      * @param roleName
      * @return
      */
-    public List<TSysRole> getSysRoleList(@Param("roleName") String roleName);
+    public List<TSysRole> getSysRoleList(String roleName);
 
     /**
     * @Author: SIYU

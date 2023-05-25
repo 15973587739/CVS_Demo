@@ -84,9 +84,9 @@
 
     <select id="getUserByRoleIdArray" resultType="cn.cvs.pojo.TSysUser">
         select * from t_sys_user where roleId in
-                                 <foreach collection="array" item="item" open="(" separator="," close=")">
-                                     #{item}
-                                 </foreach>
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
 
 
@@ -100,19 +100,26 @@
         where id = #{id}
     </select>
 
-    <select id="selectPageList" resultType="cn.cvs.pojo.TSysUser">
-        select * from t_sys_user
-        <trim prefix="where" prefixOverrides="and | or">
-            <if test="reName != null and reName != ''">
-                and realName like CONCAT ('%',#{realName},'%')
-            </if>
-            <if test="roId != null">
-                and id = #{roId}
-            </if>
-        </trim>
-        order by createdTime desc
-        limit #{pageBegin} ,  #{pageSize}
+    <resultMap id="userList" type="TSysUser">
+        <association property="sysRole"  javaType="TSysRole">
+            <id property="id" column="rid"/>
+            <result property="roleName" column="roleName"/>
+        </association>
+    </resultMap>
+
+    <select id="selectPageList" resultMap="userList">
+        select u.*,r.id as rid, r.roleName
+        from t_sys_user u,t_sys_role r where u.roleId=r.id
+        <if test="realId !=null">
+            and u.roleId=#{realId}
+        </if>
+        <if test="realName != null and realName!=''">
+            and u.realName like CONCAT ('%',#{realName},'%')
+        </if>
+        order by createdTime desc limit #{pageBegin},#{pageSize}
     </select>
+
+
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="TSysUserMap">
@@ -175,7 +182,7 @@
                 and account = #{account}
             </if>
             <if test="realName != null and realName != ''">
-                and realName = #{realName}
+                and realName like CONCAT ('%',#{realName},'%')
             </if>
             <if test="password != null and password != ''">
                 and password = #{password}

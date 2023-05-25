@@ -20,7 +20,7 @@ public class TSysUser implements Serializable {
     /**
      * 主键ID
      */
-    private Long id;
+    private Integer id;
     /**
      * 账号
      */
@@ -58,7 +58,7 @@ public class TSysUser implements Serializable {
     /**
      * 用户角色id
      */
-    private Long roleId;
+    private Integer roleId;
     /**
      * 用户角色名称
      */
@@ -66,7 +66,7 @@ public class TSysUser implements Serializable {
     /**
      * 创建人
      */
-    private Long createdUserId;
+    private Integer createdUserId;
     /**
      * 创建时间
      */
@@ -75,7 +75,7 @@ public class TSysUser implements Serializable {
     /**
      * 修改人
      */
-    private Long updatedUserId;
+    private Integer updatedUserId;
     /**
      * 修改时间
      */
@@ -91,7 +91,7 @@ public class TSysUser implements Serializable {
 
     }
 
-    public TSysUser(Long id, String account, String realName, String password, Integer sex, String phone, String address, Long roleId, Long createdUserId, Date createdTime, Long updatedUserId, Date updatedTime) {
+    public TSysUser(Integer id, String account, String realName, String password, Integer sex, String phone, String address, Integer roleId, Integer createdUserId, Date createdTime, Integer updatedUserId, Date updatedTime) {
         this.id = id;
         this.account = account;
         this.realName = realName;
@@ -119,11 +119,11 @@ public class TSysUser implements Serializable {
     }
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -183,11 +183,11 @@ public class TSysUser implements Serializable {
         this.address = address;
     }
 
-    public Long getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
 //        this.sysRole.setId(roleId);
     }
@@ -196,13 +196,13 @@ public class TSysUser implements Serializable {
      * 系统角色实体类
      */
     public TSysRole getSysRole() {
-        return sysRole;
+            return sysRole;
     }
 
     public void setSysRole(TSysRole sysRole) {
         this.sysRole = sysRole;
         this.roleId = sysRole.getId();
-        this.realName = sysRole.getRoleName();
+        this.userRoleName = sysRole.getRoleName();
     }
 
     /**
@@ -219,11 +219,11 @@ public class TSysUser implements Serializable {
     /**
      * 创建人
      */
-    public Long getCreatedUserId() {
+    public Integer getCreatedUserId() {
         return createdUserId;
     }
 
-    public void setCreatedUserId(Long createdUserId) {
+    public void setCreatedUserId(Integer createdUserId) {
         this.createdUserId = createdUserId;
     }
 
@@ -241,11 +241,11 @@ public class TSysUser implements Serializable {
     /**
      * 修改人
      */
-    public Long getUpdatedUserId() {
+    public Integer getUpdatedUserId() {
         return updatedUserId;
     }
 
-    public void setUpdatedUserId(Long updatedUserId) {
+    public void setUpdatedUserId(Integer updatedUserId) {
         this.updatedUserId = updatedUserId;
     }
 

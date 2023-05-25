@@ -20,6 +20,12 @@ public interface TSupplierMapper {
      * @return 总行数
      */
     long count(TSupplier tSupplier);
+    /**
+     * 统计总行数
+     * @return 总行数
+     */
+    long countBySup(TSupplier tSupplier);
+
 
     /**
      * 集合返回
@@ -58,7 +64,15 @@ public interface TSupplierMapper {
     List<TSupplier> queryAllByLimit(TSupplier tSupplier, @Param("pageBegin") Integer pageBegin  ,  @Param("pageSize") Integer pageSize);
 
 
-
+    /**
+     * 查询指定行数据
+     *
+     * @param supCode 查询条件
+     * @param supName 查询条件
+     * @param pageBegin         分页对象
+     * @return 对象列表
+     */
+    List<TSupplier> queryByLimit(@Param("supCode")String supCode,@Param("supName")String supName, @Param("pageBegin") Integer pageBegin  ,  @Param("pageSize") Integer pageSize);
 
 
     /**

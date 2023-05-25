@@ -8,7 +8,7 @@
                 <span>用户管理页面</span>
             </div>
             <div class="search">
-           		<form method="get" action="${pageContext.request.contextPath }/sys/user/list">
+           		<form method="get" action="${pageContext.request.contextPath }/user/list">
 					 <span>用户名：</span>
 					 <input name="queryRealName" class="input-text"	type="text" value="${queryRealName }">
 					 
@@ -25,7 +25,7 @@
 					 
 					 <input type="hidden" name="pageIndex" value="1"/>
 					 <input	value="查 询" type="submit" id="searchbutton">
-					 <a href="${pageContext.request.contextPath}/sys/user/toAdd" >添加</a>
+					 <a href="${pageContext.request.contextPath}/user/toAdd" >添加</a>
 				</form>
             </div>
             <!--用户-->
@@ -48,7 +48,7 @@
 						<span>${user.realName }</span>
 						</td>
 						<td>
-							<span>${user.roleIdName}</span>
+							<span>${user.sysRole.roleName}</span>
 						</td>
 						<td>
 							<span>
@@ -57,7 +57,7 @@
 							</span>
 						</td>
 						<td>
-						<span>${user.age}</span>
+						<span>${user.sex}</span>
 						</td>
 						<td>
 						<span>${user.phone}</span>
@@ -73,7 +73,7 @@
 			<input type="hidden" id="totalPageCount" value="${totalPageCount}"/>
 		  	<c:import url="/WEB-INF/jsp/sysRole/rollpage.jsp">
 	          	<c:param name="totalCount" value="${totalCount}"/>
-	          	<c:param name="currentPageNo" value="${currentPageNo}"/>
+	          	<c:param name="pageIndex" value="${pageIndex}"/>
 	          	<c:param name="totalPageCount" value="${totalPageCount}"/>
           	</c:import>
 			<%--<div class="supplierAdd">

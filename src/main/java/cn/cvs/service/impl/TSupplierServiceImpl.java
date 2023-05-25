@@ -17,7 +17,7 @@ import java.util.List;
  **/
 @Service("supplierService")
 public class TSupplierServiceImpl implements TSupplierService {
-    @Resource
+    @Autowired
     private TSupplierMapper supplierMapper;
     @Override
     public List<TSupplier> selectByName(String supName) {
@@ -34,9 +34,9 @@ public class TSupplierServiceImpl implements TSupplierService {
 
     @Override
     public long count(TSupplier tSupplier) {
-        int count = 0;
+        long count = 0;
         try {
-            count = (int) supplierMapper.count(tSupplier);
+            count = supplierMapper.countBySup(tSupplier);
         } catch (RuntimeException e) {
             e.printStackTrace();
             throw e;
@@ -48,7 +48,8 @@ public class TSupplierServiceImpl implements TSupplierService {
     public List<TSupplier> queryAllByLimit(TSupplier tSupplier, Integer pageBegin, Integer pageSize) {
         List<TSupplier> list = new ArrayList<>();
         try {
-            list = supplierMapper.queryAllByLimit(tSupplier, pageBegin, pageSize);
+            list = supplierMapper.queryByLimit(tSupplier.getSupCode(),tSupplier.getSupName(), (pageBegin -1) * pageSize, pageSize);
+//            list = supplierMapper.queryAllByLimit(tSupplier,(pageBegin - 1) * pageSize, pageSize);
         } catch (Exception e) {
             e.printStackTrace();
         }

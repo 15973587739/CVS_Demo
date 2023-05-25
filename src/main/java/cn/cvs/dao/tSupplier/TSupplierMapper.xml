@@ -104,10 +104,38 @@
         limit #{pageBegin} ,  #{pageSize}
     </select>
 
+    <select id="queryByLimit" resultMap="TSupplierMap">
+        select
+        id, supCode, supName, supDesc, supContact, supPhone, supAddress, supFax, createdUserId, createdTime, updatedTime, updatedUserId
+        from t_supplier
+        <where>
+            <if test="supCode != null and supCode != ''">
+                and supCode  like CONCAT('%', #{supCode},'%')
+            </if>
+            <if test="supName != null and supName != ''">
+                and supName  like CONCAT('%', #{supName},'%')
+            </if>
+        </where>
+        limit #{pageBegin} ,  #{pageSize}
+    </select>
+
+    <select id="countBySup" resultType="java.lang.Long">
+        select
+        count(1)
+        from t_supplier
+        <where>
+            <if test="supCode != null and supCode != ''">
+                and supCode  like CONCAT('%', #{supCode},'%')
+            </if>
+            <if test="supName != null and supName != ''">
+                and supName  like CONCAT('%', #{supName},'%')
+            </if>
+        </where>
+    </select>
+
     <!--统计总行数-->
     <select id="count" resultType="java.lang.Long">
-        select count(1)
-        from t_supplier
+        select count(1) from t_supplier
         <where>
             <if test="id != null">
                 and id = #{id}

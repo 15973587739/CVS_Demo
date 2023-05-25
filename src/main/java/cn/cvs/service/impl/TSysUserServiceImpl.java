@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -51,6 +52,18 @@ public class TSysUserServiceImpl implements TSysUserService {
     }
 
     @Override
+    public List<TSysUser> list(String realName, Integer realId,  Integer pageBegin  , Integer pageSize) {
+        try {
+            return sysUserMapper.selectPageList(realName, realId, (pageBegin - 1) * pageSize, pageSize);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+
+
+    @Override
     public TSysUser queryById(Long id) {
         try {
             return sysUserMapper.queryById(id);
@@ -71,13 +84,15 @@ public class TSysUserServiceImpl implements TSysUserService {
     }
 
     @Override
-    public List<TSysUser> selectPageList(String realName, int realId, Integer pageBegin, Integer pageSize) {
+    public List<TSysUser> selectPageList(String realName, Integer realId, Integer pageBegin, Integer pageSize) {
+        List<TSysUser> list = new ArrayList<TSysUser>();
         try {
-            return sysUserMapper.selectPageList(realName,realId,pageBegin,pageSize);
+            list = sysUserMapper.selectPageList(realName, realId, (pageBegin-1)*pageSize, pageSize);
         }catch (RuntimeException e){
             e.printStackTrace();
             throw e;
         }
+        return list;
     }
 
 

@@ -42,9 +42,9 @@ public class SysUserController {
     private ArrayList<TSysUser> sysUsers = new ArrayList<TSysUser>();
     private ArrayList<TSysUser> queryUsers = new ArrayList<TSysUser>();
     @Autowired
-    TSysUserService service = new TSysUserServiceImpl();
+    TSysUserService service;
     @Autowired
-    TSysRoleService roleService = new TSysRoleServiceImpl();
+    TSysRoleService roleService;
 
     @RequestMapping(value="/toLogin")
     public String login(){
@@ -98,53 +98,27 @@ public class SysUserController {
         logger.info("保存用户详细");
         return null;
     }
-//    @GetMapping(value ="list")
-//    public String list(Model model) throws Exception {
-//        logger.info("单查询条件为空时，查询用户信息");
-//        queryUsers.clear();
-//        queryUsers.addAll(sysUsers);
-//        model.addAttribute("queryUsers",queryUsers);
-//        return "sysUser/sysUserList";
-//    }
-//    @PostMapping("/list")
-//    public String list(@RequestParam(value="realName",required = false) String realName, Model model) throws Exception {
-//        logger.info("查询条件:realName = " + realName+",查询用户信息");
-//        queryUsers.clear();
-//        if (realName != null && realName.equals("")) {
-//            for (TSysUser user : queryUsers){
-//                if (user.getRealName().indexOf(realName)!= -1){
-//                    queryUsers.add(user);
-//                }
-//            }
-//        }else {
-//            queryUsers.addAll(sysUsers);
-//        }
-//        model.addAttribute("queryUsers", queryUsers);
-//        return "sysUser/sysUserList";
-//    }
 
     @GetMapping("/list")
-    public String getUserList(Model model,String realName,Long roleId, @RequestParam(defaultValue = "1")Integer pageIndex){
+    public String getUserList(Model model,String queryRealName,Integer queryRoleId, @RequestParam(defaultValue = "1")Integer pageIndex){
         List<TSysUser> userList = null;
         try {
             int pageSize = Constants.pageSize;
             TSysUser user = new TSysUser();
-            user.setRealName(realName);
-            user.setRoleId(roleId);
-            Long totalCount = service.count(user);
+            user.setRealName(queryRealName);
+            user.setRoleId(queryRoleId);
+            int totalCount = (int) service.count(user);
+            if (totalCount < 0){
+                totalCount = 1;
+            }
+            Pager page = new Pager(totalCount, pageSize,pageIndex);
 
-            Pager page = new Pager();
-            page.setPageNo(pageIndex);
-            page.setPageSize(pageSize);
-            page.setPageCount(Math.toIntExact(totalCount));
-
-            int totalPageCount = page.getRowCount();
+            int totalPageCount = page.getPageCount();
             if (pageIndex > totalPageCount){
                 pageIndex = totalPageCount;
                 throw  new RuntimeException("页码不正确");
             }
-
-            userList = service.selectPageList(realName, Math.toIntExact(roleId),pageIndex,pageSize);
+            userList = service.selectPageList(queryRealName, queryRoleId,pageIndex,pageSize);
             model.addAttribute("userList",userList);
             List<TSysRole> roleList = null;
             roleList = roleService.getSysRoleList("");
@@ -152,12 +126,12 @@ public class SysUserController {
             model.addAttribute("pageIndex", pageIndex);
             model.addAttribute("totalPageCount", totalPageCount);
             model.addAttribute("totalCount", totalCount);
-            model.addAttribute("realName",realName);
-            model.addAttribute("roleId",roleId==null?0:roleId);
+            model.addAttribute("queryRealName",queryRealName);
+            model.addAttribute("queryRoleId",queryRoleId==null?0:queryRoleId);
         }catch (Exception e) {
             e.printStackTrace();
             logger.error("用户列表接口访问失败");
-            return "redirect:/user/toSysError";
+            return "redirect:/sysError";
         }
         return "sysUser/list";
     }
