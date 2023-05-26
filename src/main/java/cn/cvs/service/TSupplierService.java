@@ -25,6 +25,14 @@ public interface TSupplierService {
     long count(TSupplier tSupplier);
 
     /**
+     * 通过ID查询单条数据
+     *
+     * @param id 主键
+     * @return 实例对象
+     */
+    TSupplier queryById(Long id);
+
+    /**
      * 查询指定行数据
      *
      * @param tSupplier 查询条件

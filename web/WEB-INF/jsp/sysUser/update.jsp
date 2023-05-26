@@ -7,7 +7,7 @@
             <span>用户管理页面 >> 用户修改页面</span>
         </div>
         <div class="supplierAdd">
-        <form id="userForm" name="userForm" method="post" action="${pageContext.request.contextPath }/sys/user/update">
+        <form id="userForm" name="userForm" method="post" action="${pageContext.request.contextPath }/user/update">
 			<input type="hidden" name="id" value="${sysUser.id }"/>
 			 <div>
                     <label for="account">账号：</label>
@@ -54,7 +54,13 @@
                     <label >角色：</label>
                     <!-- 列出所有的角色分类 -->
 					<input type="hidden" value="${sysUser.roleId }" id="rid" />
-					<select name="roleId" id="roleList"></select>
+					<select name="roleId" id="roleList">
+                        <c:forEach var="role" items="${roleList}">
+                            <option <c:if test="${role.id == queryRoleId }">selected="selected"</c:if>
+                                    value="${role.id}">${role.roleName}</option>
+                        </c:forEach>
+                    </select>
+
                     <%--<select name="roleId" id="roleId">
                         <c:choose>
                             <c:when test="${sysUser.roleId == 1 }">

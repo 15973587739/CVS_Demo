@@ -93,11 +93,10 @@
         <!---->
         <!---->
     <!--查询单个-->
-    <select id="queryById" resultMap="TSysUserMap">
-        select
-            id, account, realName, password, sex, birthday, phone, address, roleId, createdUserId, createdTime, updatedUserId, updatedTime
-        from t_sys_user
-        where id = #{id}
+    <select id="queryById" resultMap="userList">
+        select u.*,r.id as rid, r.roleName
+        from t_sys_user u,t_sys_role r where u.roleId=r.id
+        and u.id = #{id}
     </select>
 
     <resultMap id="userList" type="TSysUser">

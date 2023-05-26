@@ -45,6 +45,16 @@ public class TSupplierServiceImpl implements TSupplierService {
     }
 
     @Override
+    public TSupplier queryById(Long id) {
+        try {
+            return supplierMapper.queryById(id);
+        }catch (RuntimeException e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Override
     public List<TSupplier> queryAllByLimit(TSupplier tSupplier, Integer pageBegin, Integer pageSize) {
         List<TSupplier> list = new ArrayList<>();
         try {

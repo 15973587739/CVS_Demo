@@ -19,7 +19,7 @@
             <p><strong>出生日期：</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><fmt:formatDate value="${sysUser.birthday }" pattern="yyyy-MM-dd"/></span></p>
             <p><strong>手机号码：</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>${sysUser.phone }</span></p>
             <p><strong>地址：</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>${sysUser.address }</span></p>
-            <p><strong>角色：</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>${sysUser.roleIdName}</span></p>
+            <p><strong>角色：</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>${sysUser.sysRole.roleName}</span></p>
 			<div class="supplierAddBtn">
             	<input type="button" id="back" name="back" value="返回" >
             </div>

@@ -211,7 +211,7 @@
     </insert>
 
     <!--通过主键修改数据-->
-    <update id="update">
+    <update id="update" parameterType="TSupplier">
         update t_supplier
         <trim prefix="set" suffixOverrides="," suffix="where id = #{id}">
             <if test="supCode != null and supCode != ''">
@@ -248,7 +248,6 @@
                 updatedUserId = #{updatedUserId},
             </if>
         </trim>
-        where id = #{id}
     </update>
 
     <!--通过主键删除-->

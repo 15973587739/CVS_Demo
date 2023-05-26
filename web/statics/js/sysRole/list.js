@@ -42,7 +42,7 @@ $(function(){
 	
 	$(".modifyRole").on("click",function(){
 		var obj = $(this);
-		window.location.href=path+"/sys/role/toUpdate/"+ obj.attr("roleid");
+		window.location.href=path+"/role/toUpdate/"+ obj.attr("roleid");
 	});
 
 	$('#no').click(function () {

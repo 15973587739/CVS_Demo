@@ -16,7 +16,7 @@
         <h1>724便利店管理系统</h1>
         <div class="publicHeaderR">
             <p><span style="color: #fff21b"> ${userSession.realName }</span> , 欢迎光临！</p>
-            <a href="${pageContext.request.contextPath }/logout">登出</a>
+            <a href="${pageContext.request.contextPath }/user/logout">登出</a>
         </div>
     </header>
 <!--时间-->
@@ -35,7 +35,7 @@
               <li><a href="${pageContext.request.contextPath }/user/list">用户信息</a></li>
               <li><a href="${pageContext.request.contextPath }/sysRole/list">角色管理</a></li>
               <li><a href="${pageContext.request.contextPath }/user/toUpdatePwd">修改密码</a></li>
-              <li><a href="${pageContext.request.contextPath }/logout">退出系统</a></li>
+              <li><a href="${pageContext.request.contextPath }/user/logout">退出系统</a></li>
              </ul>
          </nav>
      </div>

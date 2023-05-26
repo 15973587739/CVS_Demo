@@ -13,28 +13,27 @@
         <p><strong>联系电话：</strong><span>${supplier.supPhone }</span></p>
         <p><strong>传真：</strong><span>${supplier.supFax }</span></p>
         <p><strong>描述：</strong><span>${supplier.supDesc}</span></p>
-        <p><strong>企业营业执照：</strong><span>
-            <c:choose>
-                <c:when test="${supplier.companyLicPicPath == null || supplier.companyLicPicPath == ''}">
-                    暂无
-                </c:when>
-                <c:otherwise>
-                    <img src="${supplier.companyLicPicPath}"/>
-                </c:otherwise>
-            </c:choose>
-            </span></p>
+<%--        <p><strong>企业营业执照：</strong><span>--%>
+<%--            <c:choose>--%>
+<%--                <c:when test="${supplier.companyLicPicPath == null || supplier.companyLicPicPath == ''}">--%>
+<%--                    暂无--%>
+<%--                </c:when>--%>
+<%--                <c:otherwise>--%>
+<%--                    <img src="${supplier.companyLicPicPath}"/>--%>
+<%--                </c:otherwise>--%>
+<%--            </c:choose>--%>
+<%--            </span></p>--%>
 
-        <p><strong>组织机构代码证：</strong><span>
-            <c:choose>
-                <c:when test="${supplier.orgCodePicPath == null || supplier.orgCodePicPath == ''}">
-                    暂无
-                </c:when>
-                <c:otherwise>
-                    <img src="${supplier.orgCodePicPath}"/>
-                </c:otherwise>
-            </c:choose>
-            </span></p>
-
+<%--        <p><strong>组织机构代码证：</strong><span>--%>
+<%--            <c:choose>--%>
+<%--                <c:when test="${supplier.orgCodePicPath == null || supplier.orgCodePicPath == ''}">--%>
+<%--                    暂无--%>
+<%--                </c:when>--%>
+<%--                <c:otherwise>--%>
+<%--                    <img src="${supplier.orgCodePicPath}"/>--%>
+<%--                </c:otherwise>--%>
+<%--            </c:choose>--%>
+<%--            </span></p>--%>
         <div class="supplierAddBtn">
             <input type="button" id="back" name="back" value="返回" >
         </div>

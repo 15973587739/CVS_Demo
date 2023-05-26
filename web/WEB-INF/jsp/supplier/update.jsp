@@ -8,7 +8,7 @@
           <span>供货商管理页面 >> 供货商修改页</span>
       </div>
       <div class="supplierAdd">
-          <form id="supplierForm" name="supplierForm" method="post" action="${pageContext.request.contextPath }/supplier/update">
+          <form id="supplierForm" name="supplierForm" method="post" action="${pageContext.request.contextPath }/sup/update">
           	<input type="hidden" name="id" value="${supplier.id }">
               <!--div的class 为error是验证错误，ok是验证成功-->
               <div class="">

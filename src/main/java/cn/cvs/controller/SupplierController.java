@@ -11,14 +11,14 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -71,10 +71,29 @@ public class SupplierController{
         return "supplier/list";
     }
 
-    @RequestMapping(value = "/view")
-    public String view() throws Exception {
+    @GetMapping("/view/{supId}")
+    public String view(@PathVariable String supId, Model model){
+        logger.info("单查询用户id = "+supId);
         logger.info("查询购物商详细");
-        return null;
+        model.addAttribute("supplier", service.queryById(Long.valueOf(supId)));
+        return "supplier/view";
     }
 
+    @RequestMapping("/toUpdate/{supId}")
+    public String toUpdate(@PathVariable String supId, Model model ) {
+        logger.info("单查询用户id = "+supId);
+        model.addAttribute("supplier", service.queryById(Long.valueOf(supId)));
+        return "supplier/update";
+    }
+    @PostMapping("/update")
+    public String update(TSupplier supplier, HttpSession session ,Model model ) {
+        logger.info("单修改用户信息");
+        supplier.setCreatedUserId(((TSysUser)session.getAttribute(Constants.USER_SESSION)).getId());
+        supplier.setUpdatedTime(new Date());
+        if (service.modify(supplier) > 0) {
+            return "redirect:/sup/list";
+        }
+        model.addAttribute("supplier", supplier);
+        return "supplier/add";
+    }
 }
